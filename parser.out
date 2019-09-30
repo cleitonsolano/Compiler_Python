@@ -1,0 +1,3427 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> Programa
+Rule 1     Programa -> DeclFuncVar DeclProg
+Rule 2     DeclFuncVar -> Tipo NOME DeclVar PVIRGULA DeclFuncVar
+Rule 3     DeclFuncVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA DeclFuncVar
+Rule 4     DeclFuncVar -> Tipo NOME DeclFunc DeclFuncVar
+Rule 5     DeclFuncVar -> <empty>
+Rule 6     DeclProg -> PROGRAMA Bloco
+Rule 7     DeclVar -> VIRGULA NOME DeclVar
+Rule 8     DeclVar -> VIRGULA NOME ECOCHETE INT DCOCHETE DeclVar
+Rule 9     DeclVar -> <empty>
+Rule 10    DeclFunc -> EPAREN ListaParametros DPAREN Bloco
+Rule 11    ListaParametros -> <empty>
+Rule 12    ListaParametros -> ListaParametrosCont
+Rule 13    ListaParametrosCont -> Tipo NOME
+Rule 14    ListaParametrosCont -> Tipo NOME ECOCHETE DCOCHETE
+Rule 15    ListaParametrosCont -> Tipo NOME VIRGULA ListaParametrosCont
+Rule 16    ListaParametrosCont -> Tipo NOME ECOCHETE DCOCHETE VIRGULA ListaParametrosCont
+Rule 17    Bloco -> ECHAVES ListaDeclVar ListaComando DCHAVES
+Rule 18    Bloco -> ECHAVES ListaDeclVar DCHAVES
+Rule 19    ListaDeclVar -> <empty>
+Rule 20    ListaDeclVar -> Tipo NOME DeclVar PVIRGULA ListaDeclVar
+Rule 21    ListaDeclVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA ListaDeclVar
+Rule 22    Tipo -> INT
+Rule 23    Tipo -> CAR
+Rule 24    ListaComando -> Comando
+Rule 25    ListaComando -> Comando ListaComando
+Rule 26    Comando -> PVIRGULA
+Rule 27    Comando -> RETORNE Expr PVIRGULA
+Rule 28    Comando -> LEIA LValueExpr PVIRGULA
+Rule 29    Comando -> ESCREVA Expr PVIRGULA
+Rule 30    Comando -> ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA
+Rule 31    Comando -> NOVALINHA PVIRGULA
+Rule 32    Comando -> SE EPAREN Expr DPAREN ENTAO Comando
+Rule 33    Comando -> SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando
+Rule 34    Comando -> ENQUANTO EPAREN Expr DPAREN EXECUTE Comando
+Rule 35    Comando -> Bloco
+Rule 36    Expr -> AssignExpr
+Rule 37    AssignExpr -> CondExpr
+Rule 38    AssignExpr -> LValueExpr IGUAL AssignExpr
+Rule 39    CondExpr -> OrExpr
+Rule 40    CondExpr -> OrExpr INTERROGACAO Expr DOISP CondExpr
+Rule 41    OrExpr -> OrExpr OU AndExpr
+Rule 42    OrExpr -> AndExpr
+Rule 43    AndExpr -> AndExpr E EqExpr
+Rule 44    AndExpr -> EqExpr
+Rule 45    EqExpr -> EqExpr ATRIBUICAO DesigExpr
+Rule 46    EqExpr -> EqExpr DIFERENTE DesigExpr
+Rule 47    EqExpr -> DesigExpr
+Rule 48    DesigExpr -> DesigExpr MENOR AddExpr
+Rule 49    DesigExpr -> DesigExpr MAIOR AddExpr
+Rule 50    DesigExpr -> DesigExpr MAIORIGUAL AddExpr
+Rule 51    DesigExpr -> DesigExpr MENORIGUAL AddExpr
+Rule 52    DesigExpr -> AddExpr
+Rule 53    AddExpr -> AddExpr MAIS MulExpr
+Rule 54    AddExpr -> AddExpr MENOS MulExpr
+Rule 55    AddExpr -> MulExpr
+Rule 56    MulExpr -> MulExpr MULTIPLICACAO UnExpr
+Rule 57    MulExpr -> MulExpr DIVIDE UnExpr
+Rule 58    MulExpr -> MulExpr MOD UnExpr
+Rule 59    MulExpr -> UnExpr
+Rule 60    UnExpr -> MENOS PrimExpr
+Rule 61    UnExpr -> EXCLAMACAO PrimExpr
+Rule 62    UnExpr -> PrimExpr
+Rule 63    LValueExpr -> NOME ECOCHETE Expr DCOCHETE
+Rule 64    LValueExpr -> NOME
+Rule 65    PrimExpr -> NOME EPAREN ListExpr DPAREN
+Rule 66    PrimExpr -> NOME EPAREN DPAREN
+Rule 67    PrimExpr -> NOME ECOCHETE Expr DCOCHETE
+Rule 68    PrimExpr -> NOME
+Rule 69    PrimExpr -> NUMERO
+Rule 70    PrimExpr -> CAR
+Rule 71    PrimExpr -> INT
+Rule 72    PrimExpr -> EPAREN Expr DPAREN
+Rule 73    ListExpr -> AssignExpr
+Rule 74    ListExpr -> ListExpr VIRGULA AssignExpr
+
+Terminals, with rules where they appear
+
+ASPASD               : 30 30
+ATRIBUICAO           : 45
+CAR                  : 23 70
+DCHAVES              : 17 18
+DCOCHETE             : 3 8 14 16 21 63 67
+DIFERENTE            : 46
+DIVIDE               : 57
+DOISP                : 40
+DPAREN               : 10 32 33 34 65 66 72
+E                    : 43
+ECHAVES              : 17 18
+ECOCHETE             : 3 8 14 16 21 63 67
+ENQUANTO             : 34
+ENTAO                : 32 33
+EPAREN               : 10 32 33 34 65 66 72
+ESCREVA              : 29 30
+EXCLAMACAO           : 61
+EXECUTE              : 34
+IGUAL                : 38
+INT                  : 3 8 21 22 71
+INTERROGACAO         : 40
+LEIA                 : 28
+MAIOR                : 49
+MAIORIGUAL           : 50
+MAIS                 : 53
+MENOR                : 48
+MENORIGUAL           : 51
+MENOS                : 54 60
+MOD                  : 58
+MULTIPLICACAO        : 56
+NOME                 : 2 3 4 7 8 13 14 15 16 20 21 63 64 65 66 67 68
+NORMALSTRING         : 30
+NOVALINHA            : 31
+NUMERO               : 69
+OU                   : 41
+PROGRAMA             : 6
+PVIRGULA             : 2 3 20 21 26 27 28 29 30 31
+RETORNE              : 27
+SE                   : 32 33
+SENAO                : 33
+VIRGULA              : 7 8 15 16 74
+error                : 
+
+Nonterminals, with rules where they appear
+
+AddExpr              : 48 49 50 51 52 53 54
+AndExpr              : 41 42 43
+AssignExpr           : 36 38 73 74
+Bloco                : 6 10 35
+Comando              : 24 25 32 33 33 34
+CondExpr             : 37 40
+DeclFunc             : 4
+DeclFuncVar          : 1 2 3 4
+DeclProg             : 1
+DeclVar              : 2 3 7 8 20 21
+DesigExpr            : 45 46 47 48 49 50 51
+EqExpr               : 43 44 45 46
+Expr                 : 27 29 32 33 34 40 63 67 72
+LValueExpr           : 28 38
+ListExpr             : 65 74
+ListaComando         : 17 25
+ListaDeclVar         : 17 18 20 21
+ListaParametros      : 10
+ListaParametrosCont  : 12 15 16
+MulExpr              : 53 54 55 56 57 58
+OrExpr               : 39 40 41
+PrimExpr             : 60 61 62
+Programa             : 0
+Tipo                 : 2 3 4 13 14 15 16 20 21
+UnExpr               : 56 57 58 59
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . Programa
+    (1) Programa -> . DeclFuncVar DeclProg
+    (2) DeclFuncVar -> . Tipo NOME DeclVar PVIRGULA DeclFuncVar
+    (3) DeclFuncVar -> . Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA DeclFuncVar
+    (4) DeclFuncVar -> . Tipo NOME DeclFunc DeclFuncVar
+    (5) DeclFuncVar -> .
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    PROGRAMA        reduce using rule 5 (DeclFuncVar -> .)
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    Programa                       shift and go to state 1
+    DeclFuncVar                    shift and go to state 2
+    Tipo                           shift and go to state 3
+
+state 1
+
+    (0) S' -> Programa .
+
+
+
+state 2
+
+    (1) Programa -> DeclFuncVar . DeclProg
+    (6) DeclProg -> . PROGRAMA Bloco
+
+    PROGRAMA        shift and go to state 7
+
+    DeclProg                       shift and go to state 6
+
+state 3
+
+    (2) DeclFuncVar -> Tipo . NOME DeclVar PVIRGULA DeclFuncVar
+    (3) DeclFuncVar -> Tipo . NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA DeclFuncVar
+    (4) DeclFuncVar -> Tipo . NOME DeclFunc DeclFuncVar
+
+    NOME            shift and go to state 8
+
+
+state 4
+
+    (22) Tipo -> INT .
+
+    NOME            reduce using rule 22 (Tipo -> INT .)
+
+
+state 5
+
+    (23) Tipo -> CAR .
+
+    NOME            reduce using rule 23 (Tipo -> CAR .)
+
+
+state 6
+
+    (1) Programa -> DeclFuncVar DeclProg .
+
+    $end            reduce using rule 1 (Programa -> DeclFuncVar DeclProg .)
+
+
+state 7
+
+    (6) DeclProg -> PROGRAMA . Bloco
+    (17) Bloco -> . ECHAVES ListaDeclVar ListaComando DCHAVES
+    (18) Bloco -> . ECHAVES ListaDeclVar DCHAVES
+
+    ECHAVES         shift and go to state 10
+
+    Bloco                          shift and go to state 9
+
+state 8
+
+    (2) DeclFuncVar -> Tipo NOME . DeclVar PVIRGULA DeclFuncVar
+    (3) DeclFuncVar -> Tipo NOME . ECOCHETE INT DCOCHETE DeclVar PVIRGULA DeclFuncVar
+    (4) DeclFuncVar -> Tipo NOME . DeclFunc DeclFuncVar
+    (7) DeclVar -> . VIRGULA NOME DeclVar
+    (8) DeclVar -> . VIRGULA NOME ECOCHETE INT DCOCHETE DeclVar
+    (9) DeclVar -> .
+    (10) DeclFunc -> . EPAREN ListaParametros DPAREN Bloco
+
+    ECOCHETE        shift and go to state 12
+    VIRGULA         shift and go to state 14
+    PVIRGULA        reduce using rule 9 (DeclVar -> .)
+    EPAREN          shift and go to state 15
+
+    DeclVar                        shift and go to state 11
+    DeclFunc                       shift and go to state 13
+
+state 9
+
+    (6) DeclProg -> PROGRAMA Bloco .
+
+    $end            reduce using rule 6 (DeclProg -> PROGRAMA Bloco .)
+
+
+state 10
+
+    (17) Bloco -> ECHAVES . ListaDeclVar ListaComando DCHAVES
+    (18) Bloco -> ECHAVES . ListaDeclVar DCHAVES
+    (19) ListaDeclVar -> .
+    (20) ListaDeclVar -> . Tipo NOME DeclVar PVIRGULA ListaDeclVar
+    (21) ListaDeclVar -> . Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA ListaDeclVar
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    DCHAVES         reduce using rule 19 (ListaDeclVar -> .)
+    PVIRGULA        reduce using rule 19 (ListaDeclVar -> .)
+    RETORNE         reduce using rule 19 (ListaDeclVar -> .)
+    LEIA            reduce using rule 19 (ListaDeclVar -> .)
+    ESCREVA         reduce using rule 19 (ListaDeclVar -> .)
+    NOVALINHA       reduce using rule 19 (ListaDeclVar -> .)
+    SE              reduce using rule 19 (ListaDeclVar -> .)
+    ENQUANTO        reduce using rule 19 (ListaDeclVar -> .)
+    ECHAVES         reduce using rule 19 (ListaDeclVar -> .)
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    ListaDeclVar                   shift and go to state 16
+    Tipo                           shift and go to state 17
+
+state 11
+
+    (2) DeclFuncVar -> Tipo NOME DeclVar . PVIRGULA DeclFuncVar
+
+    PVIRGULA        shift and go to state 18
+
+
+state 12
+
+    (3) DeclFuncVar -> Tipo NOME ECOCHETE . INT DCOCHETE DeclVar PVIRGULA DeclFuncVar
+
+    INT             shift and go to state 19
+
+
+state 13
+
+    (4) DeclFuncVar -> Tipo NOME DeclFunc . DeclFuncVar
+    (2) DeclFuncVar -> . Tipo NOME DeclVar PVIRGULA DeclFuncVar
+    (3) DeclFuncVar -> . Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA DeclFuncVar
+    (4) DeclFuncVar -> . Tipo NOME DeclFunc DeclFuncVar
+    (5) DeclFuncVar -> .
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    PROGRAMA        reduce using rule 5 (DeclFuncVar -> .)
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    Tipo                           shift and go to state 3
+    DeclFuncVar                    shift and go to state 20
+
+state 14
+
+    (7) DeclVar -> VIRGULA . NOME DeclVar
+    (8) DeclVar -> VIRGULA . NOME ECOCHETE INT DCOCHETE DeclVar
+
+    NOME            shift and go to state 21
+
+
+state 15
+
+    (10) DeclFunc -> EPAREN . ListaParametros DPAREN Bloco
+    (11) ListaParametros -> .
+    (12) ListaParametros -> . ListaParametrosCont
+    (13) ListaParametrosCont -> . Tipo NOME
+    (14) ListaParametrosCont -> . Tipo NOME ECOCHETE DCOCHETE
+    (15) ListaParametrosCont -> . Tipo NOME VIRGULA ListaParametrosCont
+    (16) ListaParametrosCont -> . Tipo NOME ECOCHETE DCOCHETE VIRGULA ListaParametrosCont
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    DPAREN          reduce using rule 11 (ListaParametros -> .)
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    ListaParametros                shift and go to state 22
+    ListaParametrosCont            shift and go to state 23
+    Tipo                           shift and go to state 24
+
+state 16
+
+    (17) Bloco -> ECHAVES ListaDeclVar . ListaComando DCHAVES
+    (18) Bloco -> ECHAVES ListaDeclVar . DCHAVES
+    (24) ListaComando -> . Comando
+    (25) ListaComando -> . Comando ListaComando
+    (26) Comando -> . PVIRGULA
+    (27) Comando -> . RETORNE Expr PVIRGULA
+    (28) Comando -> . LEIA LValueExpr PVIRGULA
+    (29) Comando -> . ESCREVA Expr PVIRGULA
+    (30) Comando -> . ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA
+    (31) Comando -> . NOVALINHA PVIRGULA
+    (32) Comando -> . SE EPAREN Expr DPAREN ENTAO Comando
+    (33) Comando -> . SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando
+    (34) Comando -> . ENQUANTO EPAREN Expr DPAREN EXECUTE Comando
+    (35) Comando -> . Bloco
+    (17) Bloco -> . ECHAVES ListaDeclVar ListaComando DCHAVES
+    (18) Bloco -> . ECHAVES ListaDeclVar DCHAVES
+
+    DCHAVES         shift and go to state 26
+    PVIRGULA        shift and go to state 28
+    RETORNE         shift and go to state 29
+    LEIA            shift and go to state 30
+    ESCREVA         shift and go to state 31
+    NOVALINHA       shift and go to state 32
+    SE              shift and go to state 33
+    ENQUANTO        shift and go to state 34
+    ECHAVES         shift and go to state 10
+
+    ListaComando                   shift and go to state 25
+    Comando                        shift and go to state 27
+    Bloco                          shift and go to state 35
+
+state 17
+
+    (20) ListaDeclVar -> Tipo . NOME DeclVar PVIRGULA ListaDeclVar
+    (21) ListaDeclVar -> Tipo . NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA ListaDeclVar
+
+    NOME            shift and go to state 36
+
+
+state 18
+
+    (2) DeclFuncVar -> Tipo NOME DeclVar PVIRGULA . DeclFuncVar
+    (2) DeclFuncVar -> . Tipo NOME DeclVar PVIRGULA DeclFuncVar
+    (3) DeclFuncVar -> . Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA DeclFuncVar
+    (4) DeclFuncVar -> . Tipo NOME DeclFunc DeclFuncVar
+    (5) DeclFuncVar -> .
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    PROGRAMA        reduce using rule 5 (DeclFuncVar -> .)
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    Tipo                           shift and go to state 3
+    DeclFuncVar                    shift and go to state 37
+
+state 19
+
+    (3) DeclFuncVar -> Tipo NOME ECOCHETE INT . DCOCHETE DeclVar PVIRGULA DeclFuncVar
+
+    DCOCHETE        shift and go to state 38
+
+
+state 20
+
+    (4) DeclFuncVar -> Tipo NOME DeclFunc DeclFuncVar .
+
+    PROGRAMA        reduce using rule 4 (DeclFuncVar -> Tipo NOME DeclFunc DeclFuncVar .)
+
+
+state 21
+
+    (7) DeclVar -> VIRGULA NOME . DeclVar
+    (8) DeclVar -> VIRGULA NOME . ECOCHETE INT DCOCHETE DeclVar
+    (7) DeclVar -> . VIRGULA NOME DeclVar
+    (8) DeclVar -> . VIRGULA NOME ECOCHETE INT DCOCHETE DeclVar
+    (9) DeclVar -> .
+
+    ECOCHETE        shift and go to state 40
+    VIRGULA         shift and go to state 14
+    PVIRGULA        reduce using rule 9 (DeclVar -> .)
+
+    DeclVar                        shift and go to state 39
+
+state 22
+
+    (10) DeclFunc -> EPAREN ListaParametros . DPAREN Bloco
+
+    DPAREN          shift and go to state 41
+
+
+state 23
+
+    (12) ListaParametros -> ListaParametrosCont .
+
+    DPAREN          reduce using rule 12 (ListaParametros -> ListaParametrosCont .)
+
+
+state 24
+
+    (13) ListaParametrosCont -> Tipo . NOME
+    (14) ListaParametrosCont -> Tipo . NOME ECOCHETE DCOCHETE
+    (15) ListaParametrosCont -> Tipo . NOME VIRGULA ListaParametrosCont
+    (16) ListaParametrosCont -> Tipo . NOME ECOCHETE DCOCHETE VIRGULA ListaParametrosCont
+
+    NOME            shift and go to state 42
+
+
+state 25
+
+    (17) Bloco -> ECHAVES ListaDeclVar ListaComando . DCHAVES
+
+    DCHAVES         shift and go to state 43
+
+
+state 26
+
+    (18) Bloco -> ECHAVES ListaDeclVar DCHAVES .
+
+    $end            reduce using rule 18 (Bloco -> ECHAVES ListaDeclVar DCHAVES .)
+    PVIRGULA        reduce using rule 18 (Bloco -> ECHAVES ListaDeclVar DCHAVES .)
+    RETORNE         reduce using rule 18 (Bloco -> ECHAVES ListaDeclVar DCHAVES .)
+    LEIA            reduce using rule 18 (Bloco -> ECHAVES ListaDeclVar DCHAVES .)
+    ESCREVA         reduce using rule 18 (Bloco -> ECHAVES ListaDeclVar DCHAVES .)
+    NOVALINHA       reduce using rule 18 (Bloco -> ECHAVES ListaDeclVar DCHAVES .)
+    SE              reduce using rule 18 (Bloco -> ECHAVES ListaDeclVar DCHAVES .)
+    ENQUANTO        reduce using rule 18 (Bloco -> ECHAVES ListaDeclVar DCHAVES .)
+    ECHAVES         reduce using rule 18 (Bloco -> ECHAVES ListaDeclVar DCHAVES .)
+    DCHAVES         reduce using rule 18 (Bloco -> ECHAVES ListaDeclVar DCHAVES .)
+    INT             reduce using rule 18 (Bloco -> ECHAVES ListaDeclVar DCHAVES .)
+    CAR             reduce using rule 18 (Bloco -> ECHAVES ListaDeclVar DCHAVES .)
+    PROGRAMA        reduce using rule 18 (Bloco -> ECHAVES ListaDeclVar DCHAVES .)
+    SENAO           reduce using rule 18 (Bloco -> ECHAVES ListaDeclVar DCHAVES .)
+
+
+state 27
+
+    (24) ListaComando -> Comando .
+    (25) ListaComando -> Comando . ListaComando
+    (24) ListaComando -> . Comando
+    (25) ListaComando -> . Comando ListaComando
+    (26) Comando -> . PVIRGULA
+    (27) Comando -> . RETORNE Expr PVIRGULA
+    (28) Comando -> . LEIA LValueExpr PVIRGULA
+    (29) Comando -> . ESCREVA Expr PVIRGULA
+    (30) Comando -> . ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA
+    (31) Comando -> . NOVALINHA PVIRGULA
+    (32) Comando -> . SE EPAREN Expr DPAREN ENTAO Comando
+    (33) Comando -> . SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando
+    (34) Comando -> . ENQUANTO EPAREN Expr DPAREN EXECUTE Comando
+    (35) Comando -> . Bloco
+    (17) Bloco -> . ECHAVES ListaDeclVar ListaComando DCHAVES
+    (18) Bloco -> . ECHAVES ListaDeclVar DCHAVES
+
+    DCHAVES         reduce using rule 24 (ListaComando -> Comando .)
+    PVIRGULA        shift and go to state 28
+    RETORNE         shift and go to state 29
+    LEIA            shift and go to state 30
+    ESCREVA         shift and go to state 31
+    NOVALINHA       shift and go to state 32
+    SE              shift and go to state 33
+    ENQUANTO        shift and go to state 34
+    ECHAVES         shift and go to state 10
+
+    Comando                        shift and go to state 27
+    ListaComando                   shift and go to state 44
+    Bloco                          shift and go to state 35
+
+state 28
+
+    (26) Comando -> PVIRGULA .
+
+    PVIRGULA        reduce using rule 26 (Comando -> PVIRGULA .)
+    RETORNE         reduce using rule 26 (Comando -> PVIRGULA .)
+    LEIA            reduce using rule 26 (Comando -> PVIRGULA .)
+    ESCREVA         reduce using rule 26 (Comando -> PVIRGULA .)
+    NOVALINHA       reduce using rule 26 (Comando -> PVIRGULA .)
+    SE              reduce using rule 26 (Comando -> PVIRGULA .)
+    ENQUANTO        reduce using rule 26 (Comando -> PVIRGULA .)
+    ECHAVES         reduce using rule 26 (Comando -> PVIRGULA .)
+    DCHAVES         reduce using rule 26 (Comando -> PVIRGULA .)
+    SENAO           reduce using rule 26 (Comando -> PVIRGULA .)
+
+
+state 29
+
+    (27) Comando -> RETORNE . Expr PVIRGULA
+    (36) Expr -> . AssignExpr
+    (37) AssignExpr -> . CondExpr
+    (38) AssignExpr -> . LValueExpr IGUAL AssignExpr
+    (39) CondExpr -> . OrExpr
+    (40) CondExpr -> . OrExpr INTERROGACAO Expr DOISP CondExpr
+    (63) LValueExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (64) LValueExpr -> . NOME
+    (41) OrExpr -> . OrExpr OU AndExpr
+    (42) OrExpr -> . AndExpr
+    (43) AndExpr -> . AndExpr E EqExpr
+    (44) AndExpr -> . EqExpr
+    (45) EqExpr -> . EqExpr ATRIBUICAO DesigExpr
+    (46) EqExpr -> . EqExpr DIFERENTE DesigExpr
+    (47) EqExpr -> . DesigExpr
+    (48) DesigExpr -> . DesigExpr MENOR AddExpr
+    (49) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIORIGUAL AddExpr
+    (51) DesigExpr -> . DesigExpr MENORIGUAL AddExpr
+    (52) DesigExpr -> . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    NOME            shift and go to state 50
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    Expr                           shift and go to state 45
+    AssignExpr                     shift and go to state 46
+    CondExpr                       shift and go to state 47
+    LValueExpr                     shift and go to state 48
+    OrExpr                         shift and go to state 49
+    AndExpr                        shift and go to state 51
+    EqExpr                         shift and go to state 52
+    DesigExpr                      shift and go to state 53
+    AddExpr                        shift and go to state 54
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 30
+
+    (28) Comando -> LEIA . LValueExpr PVIRGULA
+    (63) LValueExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (64) LValueExpr -> . NOME
+
+    NOME            shift and go to state 65
+
+    LValueExpr                     shift and go to state 64
+
+state 31
+
+    (29) Comando -> ESCREVA . Expr PVIRGULA
+    (30) Comando -> ESCREVA . ASPASD NORMALSTRING ASPASD PVIRGULA
+    (36) Expr -> . AssignExpr
+    (37) AssignExpr -> . CondExpr
+    (38) AssignExpr -> . LValueExpr IGUAL AssignExpr
+    (39) CondExpr -> . OrExpr
+    (40) CondExpr -> . OrExpr INTERROGACAO Expr DOISP CondExpr
+    (63) LValueExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (64) LValueExpr -> . NOME
+    (41) OrExpr -> . OrExpr OU AndExpr
+    (42) OrExpr -> . AndExpr
+    (43) AndExpr -> . AndExpr E EqExpr
+    (44) AndExpr -> . EqExpr
+    (45) EqExpr -> . EqExpr ATRIBUICAO DesigExpr
+    (46) EqExpr -> . EqExpr DIFERENTE DesigExpr
+    (47) EqExpr -> . DesigExpr
+    (48) DesigExpr -> . DesigExpr MENOR AddExpr
+    (49) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIORIGUAL AddExpr
+    (51) DesigExpr -> . DesigExpr MENORIGUAL AddExpr
+    (52) DesigExpr -> . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    ASPASD          shift and go to state 67
+    NOME            shift and go to state 50
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    Expr                           shift and go to state 66
+    AssignExpr                     shift and go to state 46
+    CondExpr                       shift and go to state 47
+    LValueExpr                     shift and go to state 48
+    OrExpr                         shift and go to state 49
+    AndExpr                        shift and go to state 51
+    EqExpr                         shift and go to state 52
+    DesigExpr                      shift and go to state 53
+    AddExpr                        shift and go to state 54
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 32
+
+    (31) Comando -> NOVALINHA . PVIRGULA
+
+    PVIRGULA        shift and go to state 68
+
+
+state 33
+
+    (32) Comando -> SE . EPAREN Expr DPAREN ENTAO Comando
+    (33) Comando -> SE . EPAREN Expr DPAREN ENTAO Comando SENAO Comando
+
+    EPAREN          shift and go to state 69
+
+
+state 34
+
+    (34) Comando -> ENQUANTO . EPAREN Expr DPAREN EXECUTE Comando
+
+    EPAREN          shift and go to state 70
+
+
+state 35
+
+    (35) Comando -> Bloco .
+
+    PVIRGULA        reduce using rule 35 (Comando -> Bloco .)
+    RETORNE         reduce using rule 35 (Comando -> Bloco .)
+    LEIA            reduce using rule 35 (Comando -> Bloco .)
+    ESCREVA         reduce using rule 35 (Comando -> Bloco .)
+    NOVALINHA       reduce using rule 35 (Comando -> Bloco .)
+    SE              reduce using rule 35 (Comando -> Bloco .)
+    ENQUANTO        reduce using rule 35 (Comando -> Bloco .)
+    ECHAVES         reduce using rule 35 (Comando -> Bloco .)
+    DCHAVES         reduce using rule 35 (Comando -> Bloco .)
+    SENAO           reduce using rule 35 (Comando -> Bloco .)
+
+
+state 36
+
+    (20) ListaDeclVar -> Tipo NOME . DeclVar PVIRGULA ListaDeclVar
+    (21) ListaDeclVar -> Tipo NOME . ECOCHETE INT DCOCHETE DeclVar PVIRGULA ListaDeclVar
+    (7) DeclVar -> . VIRGULA NOME DeclVar
+    (8) DeclVar -> . VIRGULA NOME ECOCHETE INT DCOCHETE DeclVar
+    (9) DeclVar -> .
+
+    ECOCHETE        shift and go to state 72
+    VIRGULA         shift and go to state 14
+    PVIRGULA        reduce using rule 9 (DeclVar -> .)
+
+    DeclVar                        shift and go to state 71
+
+state 37
+
+    (2) DeclFuncVar -> Tipo NOME DeclVar PVIRGULA DeclFuncVar .
+
+    PROGRAMA        reduce using rule 2 (DeclFuncVar -> Tipo NOME DeclVar PVIRGULA DeclFuncVar .)
+
+
+state 38
+
+    (3) DeclFuncVar -> Tipo NOME ECOCHETE INT DCOCHETE . DeclVar PVIRGULA DeclFuncVar
+    (7) DeclVar -> . VIRGULA NOME DeclVar
+    (8) DeclVar -> . VIRGULA NOME ECOCHETE INT DCOCHETE DeclVar
+    (9) DeclVar -> .
+
+    VIRGULA         shift and go to state 14
+    PVIRGULA        reduce using rule 9 (DeclVar -> .)
+
+    DeclVar                        shift and go to state 73
+
+state 39
+
+    (7) DeclVar -> VIRGULA NOME DeclVar .
+
+    PVIRGULA        reduce using rule 7 (DeclVar -> VIRGULA NOME DeclVar .)
+
+
+state 40
+
+    (8) DeclVar -> VIRGULA NOME ECOCHETE . INT DCOCHETE DeclVar
+
+    INT             shift and go to state 74
+
+
+state 41
+
+    (10) DeclFunc -> EPAREN ListaParametros DPAREN . Bloco
+    (17) Bloco -> . ECHAVES ListaDeclVar ListaComando DCHAVES
+    (18) Bloco -> . ECHAVES ListaDeclVar DCHAVES
+
+    ECHAVES         shift and go to state 10
+
+    Bloco                          shift and go to state 75
+
+state 42
+
+    (13) ListaParametrosCont -> Tipo NOME .
+    (14) ListaParametrosCont -> Tipo NOME . ECOCHETE DCOCHETE
+    (15) ListaParametrosCont -> Tipo NOME . VIRGULA ListaParametrosCont
+    (16) ListaParametrosCont -> Tipo NOME . ECOCHETE DCOCHETE VIRGULA ListaParametrosCont
+
+    DPAREN          reduce using rule 13 (ListaParametrosCont -> Tipo NOME .)
+    ECOCHETE        shift and go to state 76
+    VIRGULA         shift and go to state 77
+
+
+state 43
+
+    (17) Bloco -> ECHAVES ListaDeclVar ListaComando DCHAVES .
+
+    $end            reduce using rule 17 (Bloco -> ECHAVES ListaDeclVar ListaComando DCHAVES .)
+    PVIRGULA        reduce using rule 17 (Bloco -> ECHAVES ListaDeclVar ListaComando DCHAVES .)
+    RETORNE         reduce using rule 17 (Bloco -> ECHAVES ListaDeclVar ListaComando DCHAVES .)
+    LEIA            reduce using rule 17 (Bloco -> ECHAVES ListaDeclVar ListaComando DCHAVES .)
+    ESCREVA         reduce using rule 17 (Bloco -> ECHAVES ListaDeclVar ListaComando DCHAVES .)
+    NOVALINHA       reduce using rule 17 (Bloco -> ECHAVES ListaDeclVar ListaComando DCHAVES .)
+    SE              reduce using rule 17 (Bloco -> ECHAVES ListaDeclVar ListaComando DCHAVES .)
+    ENQUANTO        reduce using rule 17 (Bloco -> ECHAVES ListaDeclVar ListaComando DCHAVES .)
+    ECHAVES         reduce using rule 17 (Bloco -> ECHAVES ListaDeclVar ListaComando DCHAVES .)
+    DCHAVES         reduce using rule 17 (Bloco -> ECHAVES ListaDeclVar ListaComando DCHAVES .)
+    INT             reduce using rule 17 (Bloco -> ECHAVES ListaDeclVar ListaComando DCHAVES .)
+    CAR             reduce using rule 17 (Bloco -> ECHAVES ListaDeclVar ListaComando DCHAVES .)
+    PROGRAMA        reduce using rule 17 (Bloco -> ECHAVES ListaDeclVar ListaComando DCHAVES .)
+    SENAO           reduce using rule 17 (Bloco -> ECHAVES ListaDeclVar ListaComando DCHAVES .)
+
+
+state 44
+
+    (25) ListaComando -> Comando ListaComando .
+
+    DCHAVES         reduce using rule 25 (ListaComando -> Comando ListaComando .)
+
+
+state 45
+
+    (27) Comando -> RETORNE Expr . PVIRGULA
+
+    PVIRGULA        shift and go to state 78
+
+
+state 46
+
+    (36) Expr -> AssignExpr .
+
+    PVIRGULA        reduce using rule 36 (Expr -> AssignExpr .)
+    DPAREN          reduce using rule 36 (Expr -> AssignExpr .)
+    DOISP           reduce using rule 36 (Expr -> AssignExpr .)
+    DCOCHETE        reduce using rule 36 (Expr -> AssignExpr .)
+
+
+state 47
+
+    (37) AssignExpr -> CondExpr .
+
+    PVIRGULA        reduce using rule 37 (AssignExpr -> CondExpr .)
+    DPAREN          reduce using rule 37 (AssignExpr -> CondExpr .)
+    DOISP           reduce using rule 37 (AssignExpr -> CondExpr .)
+    DCOCHETE        reduce using rule 37 (AssignExpr -> CondExpr .)
+    VIRGULA         reduce using rule 37 (AssignExpr -> CondExpr .)
+
+
+state 48
+
+    (38) AssignExpr -> LValueExpr . IGUAL AssignExpr
+
+    IGUAL           shift and go to state 79
+
+
+state 49
+
+    (39) CondExpr -> OrExpr .
+    (40) CondExpr -> OrExpr . INTERROGACAO Expr DOISP CondExpr
+    (41) OrExpr -> OrExpr . OU AndExpr
+
+    PVIRGULA        reduce using rule 39 (CondExpr -> OrExpr .)
+    DPAREN          reduce using rule 39 (CondExpr -> OrExpr .)
+    DOISP           reduce using rule 39 (CondExpr -> OrExpr .)
+    DCOCHETE        reduce using rule 39 (CondExpr -> OrExpr .)
+    VIRGULA         reduce using rule 39 (CondExpr -> OrExpr .)
+    INTERROGACAO    shift and go to state 80
+    OU              shift and go to state 81
+
+
+state 50
+
+    (63) LValueExpr -> NOME . ECOCHETE Expr DCOCHETE
+    (64) LValueExpr -> NOME .
+    (65) PrimExpr -> NOME . EPAREN ListExpr DPAREN
+    (66) PrimExpr -> NOME . EPAREN DPAREN
+    (67) PrimExpr -> NOME . ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> NOME .
+
+    ECOCHETE        shift and go to state 82
+    IGUAL           reduce using rule 64 (LValueExpr -> NOME .)
+    EPAREN          shift and go to state 83
+    MULTIPLICACAO   reduce using rule 68 (PrimExpr -> NOME .)
+    DIVIDE          reduce using rule 68 (PrimExpr -> NOME .)
+    MOD             reduce using rule 68 (PrimExpr -> NOME .)
+    MAIS            reduce using rule 68 (PrimExpr -> NOME .)
+    MENOS           reduce using rule 68 (PrimExpr -> NOME .)
+    MENOR           reduce using rule 68 (PrimExpr -> NOME .)
+    MAIOR           reduce using rule 68 (PrimExpr -> NOME .)
+    MAIORIGUAL      reduce using rule 68 (PrimExpr -> NOME .)
+    MENORIGUAL      reduce using rule 68 (PrimExpr -> NOME .)
+    ATRIBUICAO      reduce using rule 68 (PrimExpr -> NOME .)
+    DIFERENTE       reduce using rule 68 (PrimExpr -> NOME .)
+    E               reduce using rule 68 (PrimExpr -> NOME .)
+    INTERROGACAO    reduce using rule 68 (PrimExpr -> NOME .)
+    OU              reduce using rule 68 (PrimExpr -> NOME .)
+    PVIRGULA        reduce using rule 68 (PrimExpr -> NOME .)
+    DPAREN          reduce using rule 68 (PrimExpr -> NOME .)
+    DOISP           reduce using rule 68 (PrimExpr -> NOME .)
+    DCOCHETE        reduce using rule 68 (PrimExpr -> NOME .)
+    VIRGULA         reduce using rule 68 (PrimExpr -> NOME .)
+
+
+state 51
+
+    (42) OrExpr -> AndExpr .
+    (43) AndExpr -> AndExpr . E EqExpr
+
+    INTERROGACAO    reduce using rule 42 (OrExpr -> AndExpr .)
+    OU              reduce using rule 42 (OrExpr -> AndExpr .)
+    PVIRGULA        reduce using rule 42 (OrExpr -> AndExpr .)
+    DPAREN          reduce using rule 42 (OrExpr -> AndExpr .)
+    DOISP           reduce using rule 42 (OrExpr -> AndExpr .)
+    DCOCHETE        reduce using rule 42 (OrExpr -> AndExpr .)
+    VIRGULA         reduce using rule 42 (OrExpr -> AndExpr .)
+    E               shift and go to state 84
+
+
+state 52
+
+    (44) AndExpr -> EqExpr .
+    (45) EqExpr -> EqExpr . ATRIBUICAO DesigExpr
+    (46) EqExpr -> EqExpr . DIFERENTE DesigExpr
+
+    E               reduce using rule 44 (AndExpr -> EqExpr .)
+    INTERROGACAO    reduce using rule 44 (AndExpr -> EqExpr .)
+    OU              reduce using rule 44 (AndExpr -> EqExpr .)
+    PVIRGULA        reduce using rule 44 (AndExpr -> EqExpr .)
+    DPAREN          reduce using rule 44 (AndExpr -> EqExpr .)
+    DOISP           reduce using rule 44 (AndExpr -> EqExpr .)
+    DCOCHETE        reduce using rule 44 (AndExpr -> EqExpr .)
+    VIRGULA         reduce using rule 44 (AndExpr -> EqExpr .)
+    ATRIBUICAO      shift and go to state 85
+    DIFERENTE       shift and go to state 86
+
+
+state 53
+
+    (47) EqExpr -> DesigExpr .
+    (48) DesigExpr -> DesigExpr . MENOR AddExpr
+    (49) DesigExpr -> DesigExpr . MAIOR AddExpr
+    (50) DesigExpr -> DesigExpr . MAIORIGUAL AddExpr
+    (51) DesigExpr -> DesigExpr . MENORIGUAL AddExpr
+
+    ATRIBUICAO      reduce using rule 47 (EqExpr -> DesigExpr .)
+    DIFERENTE       reduce using rule 47 (EqExpr -> DesigExpr .)
+    E               reduce using rule 47 (EqExpr -> DesigExpr .)
+    INTERROGACAO    reduce using rule 47 (EqExpr -> DesigExpr .)
+    OU              reduce using rule 47 (EqExpr -> DesigExpr .)
+    PVIRGULA        reduce using rule 47 (EqExpr -> DesigExpr .)
+    DPAREN          reduce using rule 47 (EqExpr -> DesigExpr .)
+    DOISP           reduce using rule 47 (EqExpr -> DesigExpr .)
+    DCOCHETE        reduce using rule 47 (EqExpr -> DesigExpr .)
+    VIRGULA         reduce using rule 47 (EqExpr -> DesigExpr .)
+    MENOR           shift and go to state 87
+    MAIOR           shift and go to state 88
+    MAIORIGUAL      shift and go to state 89
+    MENORIGUAL      shift and go to state 90
+
+
+state 54
+
+    (52) DesigExpr -> AddExpr .
+    (53) AddExpr -> AddExpr . MAIS MulExpr
+    (54) AddExpr -> AddExpr . MENOS MulExpr
+
+    MENOR           reduce using rule 52 (DesigExpr -> AddExpr .)
+    MAIOR           reduce using rule 52 (DesigExpr -> AddExpr .)
+    MAIORIGUAL      reduce using rule 52 (DesigExpr -> AddExpr .)
+    MENORIGUAL      reduce using rule 52 (DesigExpr -> AddExpr .)
+    ATRIBUICAO      reduce using rule 52 (DesigExpr -> AddExpr .)
+    DIFERENTE       reduce using rule 52 (DesigExpr -> AddExpr .)
+    E               reduce using rule 52 (DesigExpr -> AddExpr .)
+    INTERROGACAO    reduce using rule 52 (DesigExpr -> AddExpr .)
+    OU              reduce using rule 52 (DesigExpr -> AddExpr .)
+    PVIRGULA        reduce using rule 52 (DesigExpr -> AddExpr .)
+    DPAREN          reduce using rule 52 (DesigExpr -> AddExpr .)
+    DOISP           reduce using rule 52 (DesigExpr -> AddExpr .)
+    DCOCHETE        reduce using rule 52 (DesigExpr -> AddExpr .)
+    VIRGULA         reduce using rule 52 (DesigExpr -> AddExpr .)
+    MAIS            shift and go to state 91
+    MENOS           shift and go to state 92
+
+
+state 55
+
+    (55) AddExpr -> MulExpr .
+    (56) MulExpr -> MulExpr . MULTIPLICACAO UnExpr
+    (57) MulExpr -> MulExpr . DIVIDE UnExpr
+    (58) MulExpr -> MulExpr . MOD UnExpr
+
+    MAIS            reduce using rule 55 (AddExpr -> MulExpr .)
+    MENOS           reduce using rule 55 (AddExpr -> MulExpr .)
+    MENOR           reduce using rule 55 (AddExpr -> MulExpr .)
+    MAIOR           reduce using rule 55 (AddExpr -> MulExpr .)
+    MAIORIGUAL      reduce using rule 55 (AddExpr -> MulExpr .)
+    MENORIGUAL      reduce using rule 55 (AddExpr -> MulExpr .)
+    ATRIBUICAO      reduce using rule 55 (AddExpr -> MulExpr .)
+    DIFERENTE       reduce using rule 55 (AddExpr -> MulExpr .)
+    E               reduce using rule 55 (AddExpr -> MulExpr .)
+    INTERROGACAO    reduce using rule 55 (AddExpr -> MulExpr .)
+    OU              reduce using rule 55 (AddExpr -> MulExpr .)
+    PVIRGULA        reduce using rule 55 (AddExpr -> MulExpr .)
+    DPAREN          reduce using rule 55 (AddExpr -> MulExpr .)
+    DOISP           reduce using rule 55 (AddExpr -> MulExpr .)
+    DCOCHETE        reduce using rule 55 (AddExpr -> MulExpr .)
+    VIRGULA         reduce using rule 55 (AddExpr -> MulExpr .)
+    MULTIPLICACAO   shift and go to state 93
+    DIVIDE          shift and go to state 94
+    MOD             shift and go to state 95
+
+
+state 56
+
+    (60) UnExpr -> MENOS . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    NOME            shift and go to state 97
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    PrimExpr                       shift and go to state 96
+
+state 57
+
+    (59) MulExpr -> UnExpr .
+
+    MULTIPLICACAO   reduce using rule 59 (MulExpr -> UnExpr .)
+    DIVIDE          reduce using rule 59 (MulExpr -> UnExpr .)
+    MOD             reduce using rule 59 (MulExpr -> UnExpr .)
+    MAIS            reduce using rule 59 (MulExpr -> UnExpr .)
+    MENOS           reduce using rule 59 (MulExpr -> UnExpr .)
+    MENOR           reduce using rule 59 (MulExpr -> UnExpr .)
+    MAIOR           reduce using rule 59 (MulExpr -> UnExpr .)
+    MAIORIGUAL      reduce using rule 59 (MulExpr -> UnExpr .)
+    MENORIGUAL      reduce using rule 59 (MulExpr -> UnExpr .)
+    ATRIBUICAO      reduce using rule 59 (MulExpr -> UnExpr .)
+    DIFERENTE       reduce using rule 59 (MulExpr -> UnExpr .)
+    E               reduce using rule 59 (MulExpr -> UnExpr .)
+    INTERROGACAO    reduce using rule 59 (MulExpr -> UnExpr .)
+    OU              reduce using rule 59 (MulExpr -> UnExpr .)
+    PVIRGULA        reduce using rule 59 (MulExpr -> UnExpr .)
+    DPAREN          reduce using rule 59 (MulExpr -> UnExpr .)
+    DOISP           reduce using rule 59 (MulExpr -> UnExpr .)
+    DCOCHETE        reduce using rule 59 (MulExpr -> UnExpr .)
+    VIRGULA         reduce using rule 59 (MulExpr -> UnExpr .)
+
+
+state 58
+
+    (62) UnExpr -> PrimExpr .
+
+    MULTIPLICACAO   reduce using rule 62 (UnExpr -> PrimExpr .)
+    DIVIDE          reduce using rule 62 (UnExpr -> PrimExpr .)
+    MOD             reduce using rule 62 (UnExpr -> PrimExpr .)
+    MAIS            reduce using rule 62 (UnExpr -> PrimExpr .)
+    MENOS           reduce using rule 62 (UnExpr -> PrimExpr .)
+    MENOR           reduce using rule 62 (UnExpr -> PrimExpr .)
+    MAIOR           reduce using rule 62 (UnExpr -> PrimExpr .)
+    MAIORIGUAL      reduce using rule 62 (UnExpr -> PrimExpr .)
+    MENORIGUAL      reduce using rule 62 (UnExpr -> PrimExpr .)
+    ATRIBUICAO      reduce using rule 62 (UnExpr -> PrimExpr .)
+    DIFERENTE       reduce using rule 62 (UnExpr -> PrimExpr .)
+    E               reduce using rule 62 (UnExpr -> PrimExpr .)
+    INTERROGACAO    reduce using rule 62 (UnExpr -> PrimExpr .)
+    OU              reduce using rule 62 (UnExpr -> PrimExpr .)
+    PVIRGULA        reduce using rule 62 (UnExpr -> PrimExpr .)
+    DPAREN          reduce using rule 62 (UnExpr -> PrimExpr .)
+    DOISP           reduce using rule 62 (UnExpr -> PrimExpr .)
+    DCOCHETE        reduce using rule 62 (UnExpr -> PrimExpr .)
+    VIRGULA         reduce using rule 62 (UnExpr -> PrimExpr .)
+
+
+state 59
+
+    (61) UnExpr -> EXCLAMACAO . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    NOME            shift and go to state 97
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    PrimExpr                       shift and go to state 98
+
+state 60
+
+    (72) PrimExpr -> EPAREN . Expr DPAREN
+    (36) Expr -> . AssignExpr
+    (37) AssignExpr -> . CondExpr
+    (38) AssignExpr -> . LValueExpr IGUAL AssignExpr
+    (39) CondExpr -> . OrExpr
+    (40) CondExpr -> . OrExpr INTERROGACAO Expr DOISP CondExpr
+    (63) LValueExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (64) LValueExpr -> . NOME
+    (41) OrExpr -> . OrExpr OU AndExpr
+    (42) OrExpr -> . AndExpr
+    (43) AndExpr -> . AndExpr E EqExpr
+    (44) AndExpr -> . EqExpr
+    (45) EqExpr -> . EqExpr ATRIBUICAO DesigExpr
+    (46) EqExpr -> . EqExpr DIFERENTE DesigExpr
+    (47) EqExpr -> . DesigExpr
+    (48) DesigExpr -> . DesigExpr MENOR AddExpr
+    (49) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIORIGUAL AddExpr
+    (51) DesigExpr -> . DesigExpr MENORIGUAL AddExpr
+    (52) DesigExpr -> . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    NOME            shift and go to state 50
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    Expr                           shift and go to state 99
+    AssignExpr                     shift and go to state 46
+    CondExpr                       shift and go to state 47
+    LValueExpr                     shift and go to state 48
+    OrExpr                         shift and go to state 49
+    AndExpr                        shift and go to state 51
+    EqExpr                         shift and go to state 52
+    DesigExpr                      shift and go to state 53
+    AddExpr                        shift and go to state 54
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 61
+
+    (69) PrimExpr -> NUMERO .
+
+    MULTIPLICACAO   reduce using rule 69 (PrimExpr -> NUMERO .)
+    DIVIDE          reduce using rule 69 (PrimExpr -> NUMERO .)
+    MOD             reduce using rule 69 (PrimExpr -> NUMERO .)
+    MAIS            reduce using rule 69 (PrimExpr -> NUMERO .)
+    MENOS           reduce using rule 69 (PrimExpr -> NUMERO .)
+    MENOR           reduce using rule 69 (PrimExpr -> NUMERO .)
+    MAIOR           reduce using rule 69 (PrimExpr -> NUMERO .)
+    MAIORIGUAL      reduce using rule 69 (PrimExpr -> NUMERO .)
+    MENORIGUAL      reduce using rule 69 (PrimExpr -> NUMERO .)
+    ATRIBUICAO      reduce using rule 69 (PrimExpr -> NUMERO .)
+    DIFERENTE       reduce using rule 69 (PrimExpr -> NUMERO .)
+    E               reduce using rule 69 (PrimExpr -> NUMERO .)
+    INTERROGACAO    reduce using rule 69 (PrimExpr -> NUMERO .)
+    OU              reduce using rule 69 (PrimExpr -> NUMERO .)
+    PVIRGULA        reduce using rule 69 (PrimExpr -> NUMERO .)
+    DPAREN          reduce using rule 69 (PrimExpr -> NUMERO .)
+    DOISP           reduce using rule 69 (PrimExpr -> NUMERO .)
+    DCOCHETE        reduce using rule 69 (PrimExpr -> NUMERO .)
+    VIRGULA         reduce using rule 69 (PrimExpr -> NUMERO .)
+
+
+state 62
+
+    (70) PrimExpr -> CAR .
+
+    MULTIPLICACAO   reduce using rule 70 (PrimExpr -> CAR .)
+    DIVIDE          reduce using rule 70 (PrimExpr -> CAR .)
+    MOD             reduce using rule 70 (PrimExpr -> CAR .)
+    MAIS            reduce using rule 70 (PrimExpr -> CAR .)
+    MENOS           reduce using rule 70 (PrimExpr -> CAR .)
+    MENOR           reduce using rule 70 (PrimExpr -> CAR .)
+    MAIOR           reduce using rule 70 (PrimExpr -> CAR .)
+    MAIORIGUAL      reduce using rule 70 (PrimExpr -> CAR .)
+    MENORIGUAL      reduce using rule 70 (PrimExpr -> CAR .)
+    ATRIBUICAO      reduce using rule 70 (PrimExpr -> CAR .)
+    DIFERENTE       reduce using rule 70 (PrimExpr -> CAR .)
+    E               reduce using rule 70 (PrimExpr -> CAR .)
+    INTERROGACAO    reduce using rule 70 (PrimExpr -> CAR .)
+    OU              reduce using rule 70 (PrimExpr -> CAR .)
+    PVIRGULA        reduce using rule 70 (PrimExpr -> CAR .)
+    DPAREN          reduce using rule 70 (PrimExpr -> CAR .)
+    DOISP           reduce using rule 70 (PrimExpr -> CAR .)
+    DCOCHETE        reduce using rule 70 (PrimExpr -> CAR .)
+    VIRGULA         reduce using rule 70 (PrimExpr -> CAR .)
+
+
+state 63
+
+    (71) PrimExpr -> INT .
+
+    MULTIPLICACAO   reduce using rule 71 (PrimExpr -> INT .)
+    DIVIDE          reduce using rule 71 (PrimExpr -> INT .)
+    MOD             reduce using rule 71 (PrimExpr -> INT .)
+    MAIS            reduce using rule 71 (PrimExpr -> INT .)
+    MENOS           reduce using rule 71 (PrimExpr -> INT .)
+    MENOR           reduce using rule 71 (PrimExpr -> INT .)
+    MAIOR           reduce using rule 71 (PrimExpr -> INT .)
+    MAIORIGUAL      reduce using rule 71 (PrimExpr -> INT .)
+    MENORIGUAL      reduce using rule 71 (PrimExpr -> INT .)
+    ATRIBUICAO      reduce using rule 71 (PrimExpr -> INT .)
+    DIFERENTE       reduce using rule 71 (PrimExpr -> INT .)
+    E               reduce using rule 71 (PrimExpr -> INT .)
+    INTERROGACAO    reduce using rule 71 (PrimExpr -> INT .)
+    OU              reduce using rule 71 (PrimExpr -> INT .)
+    PVIRGULA        reduce using rule 71 (PrimExpr -> INT .)
+    DPAREN          reduce using rule 71 (PrimExpr -> INT .)
+    DOISP           reduce using rule 71 (PrimExpr -> INT .)
+    DCOCHETE        reduce using rule 71 (PrimExpr -> INT .)
+    VIRGULA         reduce using rule 71 (PrimExpr -> INT .)
+
+
+state 64
+
+    (28) Comando -> LEIA LValueExpr . PVIRGULA
+
+    PVIRGULA        shift and go to state 100
+
+
+state 65
+
+    (63) LValueExpr -> NOME . ECOCHETE Expr DCOCHETE
+    (64) LValueExpr -> NOME .
+
+    ECOCHETE        shift and go to state 101
+    PVIRGULA        reduce using rule 64 (LValueExpr -> NOME .)
+
+
+state 66
+
+    (29) Comando -> ESCREVA Expr . PVIRGULA
+
+    PVIRGULA        shift and go to state 102
+
+
+state 67
+
+    (30) Comando -> ESCREVA ASPASD . NORMALSTRING ASPASD PVIRGULA
+
+    NORMALSTRING    shift and go to state 103
+
+
+state 68
+
+    (31) Comando -> NOVALINHA PVIRGULA .
+
+    PVIRGULA        reduce using rule 31 (Comando -> NOVALINHA PVIRGULA .)
+    RETORNE         reduce using rule 31 (Comando -> NOVALINHA PVIRGULA .)
+    LEIA            reduce using rule 31 (Comando -> NOVALINHA PVIRGULA .)
+    ESCREVA         reduce using rule 31 (Comando -> NOVALINHA PVIRGULA .)
+    NOVALINHA       reduce using rule 31 (Comando -> NOVALINHA PVIRGULA .)
+    SE              reduce using rule 31 (Comando -> NOVALINHA PVIRGULA .)
+    ENQUANTO        reduce using rule 31 (Comando -> NOVALINHA PVIRGULA .)
+    ECHAVES         reduce using rule 31 (Comando -> NOVALINHA PVIRGULA .)
+    DCHAVES         reduce using rule 31 (Comando -> NOVALINHA PVIRGULA .)
+    SENAO           reduce using rule 31 (Comando -> NOVALINHA PVIRGULA .)
+
+
+state 69
+
+    (32) Comando -> SE EPAREN . Expr DPAREN ENTAO Comando
+    (33) Comando -> SE EPAREN . Expr DPAREN ENTAO Comando SENAO Comando
+    (36) Expr -> . AssignExpr
+    (37) AssignExpr -> . CondExpr
+    (38) AssignExpr -> . LValueExpr IGUAL AssignExpr
+    (39) CondExpr -> . OrExpr
+    (40) CondExpr -> . OrExpr INTERROGACAO Expr DOISP CondExpr
+    (63) LValueExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (64) LValueExpr -> . NOME
+    (41) OrExpr -> . OrExpr OU AndExpr
+    (42) OrExpr -> . AndExpr
+    (43) AndExpr -> . AndExpr E EqExpr
+    (44) AndExpr -> . EqExpr
+    (45) EqExpr -> . EqExpr ATRIBUICAO DesigExpr
+    (46) EqExpr -> . EqExpr DIFERENTE DesigExpr
+    (47) EqExpr -> . DesigExpr
+    (48) DesigExpr -> . DesigExpr MENOR AddExpr
+    (49) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIORIGUAL AddExpr
+    (51) DesigExpr -> . DesigExpr MENORIGUAL AddExpr
+    (52) DesigExpr -> . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    NOME            shift and go to state 50
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    Expr                           shift and go to state 104
+    AssignExpr                     shift and go to state 46
+    CondExpr                       shift and go to state 47
+    LValueExpr                     shift and go to state 48
+    OrExpr                         shift and go to state 49
+    AndExpr                        shift and go to state 51
+    EqExpr                         shift and go to state 52
+    DesigExpr                      shift and go to state 53
+    AddExpr                        shift and go to state 54
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 70
+
+    (34) Comando -> ENQUANTO EPAREN . Expr DPAREN EXECUTE Comando
+    (36) Expr -> . AssignExpr
+    (37) AssignExpr -> . CondExpr
+    (38) AssignExpr -> . LValueExpr IGUAL AssignExpr
+    (39) CondExpr -> . OrExpr
+    (40) CondExpr -> . OrExpr INTERROGACAO Expr DOISP CondExpr
+    (63) LValueExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (64) LValueExpr -> . NOME
+    (41) OrExpr -> . OrExpr OU AndExpr
+    (42) OrExpr -> . AndExpr
+    (43) AndExpr -> . AndExpr E EqExpr
+    (44) AndExpr -> . EqExpr
+    (45) EqExpr -> . EqExpr ATRIBUICAO DesigExpr
+    (46) EqExpr -> . EqExpr DIFERENTE DesigExpr
+    (47) EqExpr -> . DesigExpr
+    (48) DesigExpr -> . DesigExpr MENOR AddExpr
+    (49) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIORIGUAL AddExpr
+    (51) DesigExpr -> . DesigExpr MENORIGUAL AddExpr
+    (52) DesigExpr -> . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    NOME            shift and go to state 50
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    Expr                           shift and go to state 105
+    AssignExpr                     shift and go to state 46
+    CondExpr                       shift and go to state 47
+    LValueExpr                     shift and go to state 48
+    OrExpr                         shift and go to state 49
+    AndExpr                        shift and go to state 51
+    EqExpr                         shift and go to state 52
+    DesigExpr                      shift and go to state 53
+    AddExpr                        shift and go to state 54
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 71
+
+    (20) ListaDeclVar -> Tipo NOME DeclVar . PVIRGULA ListaDeclVar
+
+    PVIRGULA        shift and go to state 106
+
+
+state 72
+
+    (21) ListaDeclVar -> Tipo NOME ECOCHETE . INT DCOCHETE DeclVar PVIRGULA ListaDeclVar
+
+    INT             shift and go to state 107
+
+
+state 73
+
+    (3) DeclFuncVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar . PVIRGULA DeclFuncVar
+
+    PVIRGULA        shift and go to state 108
+
+
+state 74
+
+    (8) DeclVar -> VIRGULA NOME ECOCHETE INT . DCOCHETE DeclVar
+
+    DCOCHETE        shift and go to state 109
+
+
+state 75
+
+    (10) DeclFunc -> EPAREN ListaParametros DPAREN Bloco .
+
+    INT             reduce using rule 10 (DeclFunc -> EPAREN ListaParametros DPAREN Bloco .)
+    CAR             reduce using rule 10 (DeclFunc -> EPAREN ListaParametros DPAREN Bloco .)
+    PROGRAMA        reduce using rule 10 (DeclFunc -> EPAREN ListaParametros DPAREN Bloco .)
+
+
+state 76
+
+    (14) ListaParametrosCont -> Tipo NOME ECOCHETE . DCOCHETE
+    (16) ListaParametrosCont -> Tipo NOME ECOCHETE . DCOCHETE VIRGULA ListaParametrosCont
+
+    DCOCHETE        shift and go to state 110
+
+
+state 77
+
+    (15) ListaParametrosCont -> Tipo NOME VIRGULA . ListaParametrosCont
+    (13) ListaParametrosCont -> . Tipo NOME
+    (14) ListaParametrosCont -> . Tipo NOME ECOCHETE DCOCHETE
+    (15) ListaParametrosCont -> . Tipo NOME VIRGULA ListaParametrosCont
+    (16) ListaParametrosCont -> . Tipo NOME ECOCHETE DCOCHETE VIRGULA ListaParametrosCont
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    Tipo                           shift and go to state 24
+    ListaParametrosCont            shift and go to state 111
+
+state 78
+
+    (27) Comando -> RETORNE Expr PVIRGULA .
+
+    PVIRGULA        reduce using rule 27 (Comando -> RETORNE Expr PVIRGULA .)
+    RETORNE         reduce using rule 27 (Comando -> RETORNE Expr PVIRGULA .)
+    LEIA            reduce using rule 27 (Comando -> RETORNE Expr PVIRGULA .)
+    ESCREVA         reduce using rule 27 (Comando -> RETORNE Expr PVIRGULA .)
+    NOVALINHA       reduce using rule 27 (Comando -> RETORNE Expr PVIRGULA .)
+    SE              reduce using rule 27 (Comando -> RETORNE Expr PVIRGULA .)
+    ENQUANTO        reduce using rule 27 (Comando -> RETORNE Expr PVIRGULA .)
+    ECHAVES         reduce using rule 27 (Comando -> RETORNE Expr PVIRGULA .)
+    DCHAVES         reduce using rule 27 (Comando -> RETORNE Expr PVIRGULA .)
+    SENAO           reduce using rule 27 (Comando -> RETORNE Expr PVIRGULA .)
+
+
+state 79
+
+    (38) AssignExpr -> LValueExpr IGUAL . AssignExpr
+    (37) AssignExpr -> . CondExpr
+    (38) AssignExpr -> . LValueExpr IGUAL AssignExpr
+    (39) CondExpr -> . OrExpr
+    (40) CondExpr -> . OrExpr INTERROGACAO Expr DOISP CondExpr
+    (63) LValueExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (64) LValueExpr -> . NOME
+    (41) OrExpr -> . OrExpr OU AndExpr
+    (42) OrExpr -> . AndExpr
+    (43) AndExpr -> . AndExpr E EqExpr
+    (44) AndExpr -> . EqExpr
+    (45) EqExpr -> . EqExpr ATRIBUICAO DesigExpr
+    (46) EqExpr -> . EqExpr DIFERENTE DesigExpr
+    (47) EqExpr -> . DesigExpr
+    (48) DesigExpr -> . DesigExpr MENOR AddExpr
+    (49) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIORIGUAL AddExpr
+    (51) DesigExpr -> . DesigExpr MENORIGUAL AddExpr
+    (52) DesigExpr -> . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    NOME            shift and go to state 50
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    LValueExpr                     shift and go to state 48
+    AssignExpr                     shift and go to state 112
+    CondExpr                       shift and go to state 47
+    OrExpr                         shift and go to state 49
+    AndExpr                        shift and go to state 51
+    EqExpr                         shift and go to state 52
+    DesigExpr                      shift and go to state 53
+    AddExpr                        shift and go to state 54
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 80
+
+    (40) CondExpr -> OrExpr INTERROGACAO . Expr DOISP CondExpr
+    (36) Expr -> . AssignExpr
+    (37) AssignExpr -> . CondExpr
+    (38) AssignExpr -> . LValueExpr IGUAL AssignExpr
+    (39) CondExpr -> . OrExpr
+    (40) CondExpr -> . OrExpr INTERROGACAO Expr DOISP CondExpr
+    (63) LValueExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (64) LValueExpr -> . NOME
+    (41) OrExpr -> . OrExpr OU AndExpr
+    (42) OrExpr -> . AndExpr
+    (43) AndExpr -> . AndExpr E EqExpr
+    (44) AndExpr -> . EqExpr
+    (45) EqExpr -> . EqExpr ATRIBUICAO DesigExpr
+    (46) EqExpr -> . EqExpr DIFERENTE DesigExpr
+    (47) EqExpr -> . DesigExpr
+    (48) DesigExpr -> . DesigExpr MENOR AddExpr
+    (49) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIORIGUAL AddExpr
+    (51) DesigExpr -> . DesigExpr MENORIGUAL AddExpr
+    (52) DesigExpr -> . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    NOME            shift and go to state 50
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    OrExpr                         shift and go to state 49
+    Expr                           shift and go to state 113
+    CondExpr                       shift and go to state 47
+    AssignExpr                     shift and go to state 46
+    LValueExpr                     shift and go to state 48
+    AndExpr                        shift and go to state 51
+    EqExpr                         shift and go to state 52
+    DesigExpr                      shift and go to state 53
+    AddExpr                        shift and go to state 54
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 81
+
+    (41) OrExpr -> OrExpr OU . AndExpr
+    (43) AndExpr -> . AndExpr E EqExpr
+    (44) AndExpr -> . EqExpr
+    (45) EqExpr -> . EqExpr ATRIBUICAO DesigExpr
+    (46) EqExpr -> . EqExpr DIFERENTE DesigExpr
+    (47) EqExpr -> . DesigExpr
+    (48) DesigExpr -> . DesigExpr MENOR AddExpr
+    (49) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIORIGUAL AddExpr
+    (51) DesigExpr -> . DesigExpr MENORIGUAL AddExpr
+    (52) DesigExpr -> . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NOME            shift and go to state 97
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    AndExpr                        shift and go to state 114
+    EqExpr                         shift and go to state 52
+    DesigExpr                      shift and go to state 53
+    AddExpr                        shift and go to state 54
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 82
+
+    (63) LValueExpr -> NOME ECOCHETE . Expr DCOCHETE
+    (67) PrimExpr -> NOME ECOCHETE . Expr DCOCHETE
+    (36) Expr -> . AssignExpr
+    (37) AssignExpr -> . CondExpr
+    (38) AssignExpr -> . LValueExpr IGUAL AssignExpr
+    (39) CondExpr -> . OrExpr
+    (40) CondExpr -> . OrExpr INTERROGACAO Expr DOISP CondExpr
+    (63) LValueExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (64) LValueExpr -> . NOME
+    (41) OrExpr -> . OrExpr OU AndExpr
+    (42) OrExpr -> . AndExpr
+    (43) AndExpr -> . AndExpr E EqExpr
+    (44) AndExpr -> . EqExpr
+    (45) EqExpr -> . EqExpr ATRIBUICAO DesigExpr
+    (46) EqExpr -> . EqExpr DIFERENTE DesigExpr
+    (47) EqExpr -> . DesigExpr
+    (48) DesigExpr -> . DesigExpr MENOR AddExpr
+    (49) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIORIGUAL AddExpr
+    (51) DesigExpr -> . DesigExpr MENORIGUAL AddExpr
+    (52) DesigExpr -> . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    NOME            shift and go to state 50
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    Expr                           shift and go to state 115
+    AssignExpr                     shift and go to state 46
+    CondExpr                       shift and go to state 47
+    LValueExpr                     shift and go to state 48
+    OrExpr                         shift and go to state 49
+    AndExpr                        shift and go to state 51
+    EqExpr                         shift and go to state 52
+    DesigExpr                      shift and go to state 53
+    AddExpr                        shift and go to state 54
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 83
+
+    (65) PrimExpr -> NOME EPAREN . ListExpr DPAREN
+    (66) PrimExpr -> NOME EPAREN . DPAREN
+    (73) ListExpr -> . AssignExpr
+    (74) ListExpr -> . ListExpr VIRGULA AssignExpr
+    (37) AssignExpr -> . CondExpr
+    (38) AssignExpr -> . LValueExpr IGUAL AssignExpr
+    (39) CondExpr -> . OrExpr
+    (40) CondExpr -> . OrExpr INTERROGACAO Expr DOISP CondExpr
+    (63) LValueExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (64) LValueExpr -> . NOME
+    (41) OrExpr -> . OrExpr OU AndExpr
+    (42) OrExpr -> . AndExpr
+    (43) AndExpr -> . AndExpr E EqExpr
+    (44) AndExpr -> . EqExpr
+    (45) EqExpr -> . EqExpr ATRIBUICAO DesigExpr
+    (46) EqExpr -> . EqExpr DIFERENTE DesigExpr
+    (47) EqExpr -> . DesigExpr
+    (48) DesigExpr -> . DesigExpr MENOR AddExpr
+    (49) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIORIGUAL AddExpr
+    (51) DesigExpr -> . DesigExpr MENORIGUAL AddExpr
+    (52) DesigExpr -> . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    DPAREN          shift and go to state 117
+    NOME            shift and go to state 50
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    ListExpr                       shift and go to state 116
+    AssignExpr                     shift and go to state 118
+    CondExpr                       shift and go to state 47
+    LValueExpr                     shift and go to state 48
+    OrExpr                         shift and go to state 49
+    AndExpr                        shift and go to state 51
+    EqExpr                         shift and go to state 52
+    DesigExpr                      shift and go to state 53
+    AddExpr                        shift and go to state 54
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 84
+
+    (43) AndExpr -> AndExpr E . EqExpr
+    (45) EqExpr -> . EqExpr ATRIBUICAO DesigExpr
+    (46) EqExpr -> . EqExpr DIFERENTE DesigExpr
+    (47) EqExpr -> . DesigExpr
+    (48) DesigExpr -> . DesigExpr MENOR AddExpr
+    (49) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIORIGUAL AddExpr
+    (51) DesigExpr -> . DesigExpr MENORIGUAL AddExpr
+    (52) DesigExpr -> . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NOME            shift and go to state 97
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    EqExpr                         shift and go to state 119
+    DesigExpr                      shift and go to state 53
+    AddExpr                        shift and go to state 54
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 85
+
+    (45) EqExpr -> EqExpr ATRIBUICAO . DesigExpr
+    (48) DesigExpr -> . DesigExpr MENOR AddExpr
+    (49) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIORIGUAL AddExpr
+    (51) DesigExpr -> . DesigExpr MENORIGUAL AddExpr
+    (52) DesigExpr -> . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NOME            shift and go to state 97
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    DesigExpr                      shift and go to state 120
+    AddExpr                        shift and go to state 54
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 86
+
+    (46) EqExpr -> EqExpr DIFERENTE . DesigExpr
+    (48) DesigExpr -> . DesigExpr MENOR AddExpr
+    (49) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIORIGUAL AddExpr
+    (51) DesigExpr -> . DesigExpr MENORIGUAL AddExpr
+    (52) DesigExpr -> . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NOME            shift and go to state 97
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    DesigExpr                      shift and go to state 121
+    AddExpr                        shift and go to state 54
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 87
+
+    (48) DesigExpr -> DesigExpr MENOR . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NOME            shift and go to state 97
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    AddExpr                        shift and go to state 122
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 88
+
+    (49) DesigExpr -> DesigExpr MAIOR . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NOME            shift and go to state 97
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    AddExpr                        shift and go to state 123
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 89
+
+    (50) DesigExpr -> DesigExpr MAIORIGUAL . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NOME            shift and go to state 97
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    AddExpr                        shift and go to state 124
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 90
+
+    (51) DesigExpr -> DesigExpr MENORIGUAL . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NOME            shift and go to state 97
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    AddExpr                        shift and go to state 125
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 91
+
+    (53) AddExpr -> AddExpr MAIS . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NOME            shift and go to state 97
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    MulExpr                        shift and go to state 126
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 92
+
+    (54) AddExpr -> AddExpr MENOS . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NOME            shift and go to state 97
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    MulExpr                        shift and go to state 127
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 93
+
+    (56) MulExpr -> MulExpr MULTIPLICACAO . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NOME            shift and go to state 97
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    UnExpr                         shift and go to state 128
+    PrimExpr                       shift and go to state 58
+
+state 94
+
+    (57) MulExpr -> MulExpr DIVIDE . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NOME            shift and go to state 97
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    UnExpr                         shift and go to state 129
+    PrimExpr                       shift and go to state 58
+
+state 95
+
+    (58) MulExpr -> MulExpr MOD . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NOME            shift and go to state 97
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    UnExpr                         shift and go to state 130
+    PrimExpr                       shift and go to state 58
+
+state 96
+
+    (60) UnExpr -> MENOS PrimExpr .
+
+    MULTIPLICACAO   reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    DIVIDE          reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    MOD             reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    MAIS            reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    MENOS           reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    MENOR           reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    MAIOR           reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    MAIORIGUAL      reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    MENORIGUAL      reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    ATRIBUICAO      reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    DIFERENTE       reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    E               reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    INTERROGACAO    reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    OU              reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    PVIRGULA        reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    DPAREN          reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    DOISP           reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    DCOCHETE        reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+    VIRGULA         reduce using rule 60 (UnExpr -> MENOS PrimExpr .)
+
+
+state 97
+
+    (65) PrimExpr -> NOME . EPAREN ListExpr DPAREN
+    (66) PrimExpr -> NOME . EPAREN DPAREN
+    (67) PrimExpr -> NOME . ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> NOME .
+
+    EPAREN          shift and go to state 83
+    ECOCHETE        shift and go to state 131
+    MULTIPLICACAO   reduce using rule 68 (PrimExpr -> NOME .)
+    DIVIDE          reduce using rule 68 (PrimExpr -> NOME .)
+    MOD             reduce using rule 68 (PrimExpr -> NOME .)
+    MAIS            reduce using rule 68 (PrimExpr -> NOME .)
+    MENOS           reduce using rule 68 (PrimExpr -> NOME .)
+    MENOR           reduce using rule 68 (PrimExpr -> NOME .)
+    MAIOR           reduce using rule 68 (PrimExpr -> NOME .)
+    MAIORIGUAL      reduce using rule 68 (PrimExpr -> NOME .)
+    MENORIGUAL      reduce using rule 68 (PrimExpr -> NOME .)
+    ATRIBUICAO      reduce using rule 68 (PrimExpr -> NOME .)
+    DIFERENTE       reduce using rule 68 (PrimExpr -> NOME .)
+    E               reduce using rule 68 (PrimExpr -> NOME .)
+    INTERROGACAO    reduce using rule 68 (PrimExpr -> NOME .)
+    OU              reduce using rule 68 (PrimExpr -> NOME .)
+    PVIRGULA        reduce using rule 68 (PrimExpr -> NOME .)
+    DPAREN          reduce using rule 68 (PrimExpr -> NOME .)
+    DOISP           reduce using rule 68 (PrimExpr -> NOME .)
+    DCOCHETE        reduce using rule 68 (PrimExpr -> NOME .)
+    VIRGULA         reduce using rule 68 (PrimExpr -> NOME .)
+
+
+state 98
+
+    (61) UnExpr -> EXCLAMACAO PrimExpr .
+
+    MULTIPLICACAO   reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    DIVIDE          reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    MOD             reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    MAIS            reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    MENOS           reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    MENOR           reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    MAIOR           reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    MAIORIGUAL      reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    MENORIGUAL      reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    ATRIBUICAO      reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    DIFERENTE       reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    E               reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    INTERROGACAO    reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    OU              reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    PVIRGULA        reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    DPAREN          reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    DOISP           reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    DCOCHETE        reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+    VIRGULA         reduce using rule 61 (UnExpr -> EXCLAMACAO PrimExpr .)
+
+
+state 99
+
+    (72) PrimExpr -> EPAREN Expr . DPAREN
+
+    DPAREN          shift and go to state 132
+
+
+state 100
+
+    (28) Comando -> LEIA LValueExpr PVIRGULA .
+
+    PVIRGULA        reduce using rule 28 (Comando -> LEIA LValueExpr PVIRGULA .)
+    RETORNE         reduce using rule 28 (Comando -> LEIA LValueExpr PVIRGULA .)
+    LEIA            reduce using rule 28 (Comando -> LEIA LValueExpr PVIRGULA .)
+    ESCREVA         reduce using rule 28 (Comando -> LEIA LValueExpr PVIRGULA .)
+    NOVALINHA       reduce using rule 28 (Comando -> LEIA LValueExpr PVIRGULA .)
+    SE              reduce using rule 28 (Comando -> LEIA LValueExpr PVIRGULA .)
+    ENQUANTO        reduce using rule 28 (Comando -> LEIA LValueExpr PVIRGULA .)
+    ECHAVES         reduce using rule 28 (Comando -> LEIA LValueExpr PVIRGULA .)
+    DCHAVES         reduce using rule 28 (Comando -> LEIA LValueExpr PVIRGULA .)
+    SENAO           reduce using rule 28 (Comando -> LEIA LValueExpr PVIRGULA .)
+
+
+state 101
+
+    (63) LValueExpr -> NOME ECOCHETE . Expr DCOCHETE
+    (36) Expr -> . AssignExpr
+    (37) AssignExpr -> . CondExpr
+    (38) AssignExpr -> . LValueExpr IGUAL AssignExpr
+    (39) CondExpr -> . OrExpr
+    (40) CondExpr -> . OrExpr INTERROGACAO Expr DOISP CondExpr
+    (63) LValueExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (64) LValueExpr -> . NOME
+    (41) OrExpr -> . OrExpr OU AndExpr
+    (42) OrExpr -> . AndExpr
+    (43) AndExpr -> . AndExpr E EqExpr
+    (44) AndExpr -> . EqExpr
+    (45) EqExpr -> . EqExpr ATRIBUICAO DesigExpr
+    (46) EqExpr -> . EqExpr DIFERENTE DesigExpr
+    (47) EqExpr -> . DesigExpr
+    (48) DesigExpr -> . DesigExpr MENOR AddExpr
+    (49) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIORIGUAL AddExpr
+    (51) DesigExpr -> . DesigExpr MENORIGUAL AddExpr
+    (52) DesigExpr -> . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    NOME            shift and go to state 50
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    Expr                           shift and go to state 133
+    AssignExpr                     shift and go to state 46
+    CondExpr                       shift and go to state 47
+    LValueExpr                     shift and go to state 48
+    OrExpr                         shift and go to state 49
+    AndExpr                        shift and go to state 51
+    EqExpr                         shift and go to state 52
+    DesigExpr                      shift and go to state 53
+    AddExpr                        shift and go to state 54
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 102
+
+    (29) Comando -> ESCREVA Expr PVIRGULA .
+
+    PVIRGULA        reduce using rule 29 (Comando -> ESCREVA Expr PVIRGULA .)
+    RETORNE         reduce using rule 29 (Comando -> ESCREVA Expr PVIRGULA .)
+    LEIA            reduce using rule 29 (Comando -> ESCREVA Expr PVIRGULA .)
+    ESCREVA         reduce using rule 29 (Comando -> ESCREVA Expr PVIRGULA .)
+    NOVALINHA       reduce using rule 29 (Comando -> ESCREVA Expr PVIRGULA .)
+    SE              reduce using rule 29 (Comando -> ESCREVA Expr PVIRGULA .)
+    ENQUANTO        reduce using rule 29 (Comando -> ESCREVA Expr PVIRGULA .)
+    ECHAVES         reduce using rule 29 (Comando -> ESCREVA Expr PVIRGULA .)
+    DCHAVES         reduce using rule 29 (Comando -> ESCREVA Expr PVIRGULA .)
+    SENAO           reduce using rule 29 (Comando -> ESCREVA Expr PVIRGULA .)
+
+
+state 103
+
+    (30) Comando -> ESCREVA ASPASD NORMALSTRING . ASPASD PVIRGULA
+
+    ASPASD          shift and go to state 134
+
+
+state 104
+
+    (32) Comando -> SE EPAREN Expr . DPAREN ENTAO Comando
+    (33) Comando -> SE EPAREN Expr . DPAREN ENTAO Comando SENAO Comando
+
+    DPAREN          shift and go to state 135
+
+
+state 105
+
+    (34) Comando -> ENQUANTO EPAREN Expr . DPAREN EXECUTE Comando
+
+    DPAREN          shift and go to state 136
+
+
+state 106
+
+    (20) ListaDeclVar -> Tipo NOME DeclVar PVIRGULA . ListaDeclVar
+    (19) ListaDeclVar -> .
+    (20) ListaDeclVar -> . Tipo NOME DeclVar PVIRGULA ListaDeclVar
+    (21) ListaDeclVar -> . Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA ListaDeclVar
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    DCHAVES         reduce using rule 19 (ListaDeclVar -> .)
+    PVIRGULA        reduce using rule 19 (ListaDeclVar -> .)
+    RETORNE         reduce using rule 19 (ListaDeclVar -> .)
+    LEIA            reduce using rule 19 (ListaDeclVar -> .)
+    ESCREVA         reduce using rule 19 (ListaDeclVar -> .)
+    NOVALINHA       reduce using rule 19 (ListaDeclVar -> .)
+    SE              reduce using rule 19 (ListaDeclVar -> .)
+    ENQUANTO        reduce using rule 19 (ListaDeclVar -> .)
+    ECHAVES         reduce using rule 19 (ListaDeclVar -> .)
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    Tipo                           shift and go to state 17
+    ListaDeclVar                   shift and go to state 137
+
+state 107
+
+    (21) ListaDeclVar -> Tipo NOME ECOCHETE INT . DCOCHETE DeclVar PVIRGULA ListaDeclVar
+
+    DCOCHETE        shift and go to state 138
+
+
+state 108
+
+    (3) DeclFuncVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA . DeclFuncVar
+    (2) DeclFuncVar -> . Tipo NOME DeclVar PVIRGULA DeclFuncVar
+    (3) DeclFuncVar -> . Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA DeclFuncVar
+    (4) DeclFuncVar -> . Tipo NOME DeclFunc DeclFuncVar
+    (5) DeclFuncVar -> .
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    PROGRAMA        reduce using rule 5 (DeclFuncVar -> .)
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    Tipo                           shift and go to state 3
+    DeclFuncVar                    shift and go to state 139
+
+state 109
+
+    (8) DeclVar -> VIRGULA NOME ECOCHETE INT DCOCHETE . DeclVar
+    (7) DeclVar -> . VIRGULA NOME DeclVar
+    (8) DeclVar -> . VIRGULA NOME ECOCHETE INT DCOCHETE DeclVar
+    (9) DeclVar -> .
+
+    VIRGULA         shift and go to state 14
+    PVIRGULA        reduce using rule 9 (DeclVar -> .)
+
+    DeclVar                        shift and go to state 140
+
+state 110
+
+    (14) ListaParametrosCont -> Tipo NOME ECOCHETE DCOCHETE .
+    (16) ListaParametrosCont -> Tipo NOME ECOCHETE DCOCHETE . VIRGULA ListaParametrosCont
+
+    DPAREN          reduce using rule 14 (ListaParametrosCont -> Tipo NOME ECOCHETE DCOCHETE .)
+    VIRGULA         shift and go to state 141
+
+
+state 111
+
+    (15) ListaParametrosCont -> Tipo NOME VIRGULA ListaParametrosCont .
+
+    DPAREN          reduce using rule 15 (ListaParametrosCont -> Tipo NOME VIRGULA ListaParametrosCont .)
+
+
+state 112
+
+    (38) AssignExpr -> LValueExpr IGUAL AssignExpr .
+
+    PVIRGULA        reduce using rule 38 (AssignExpr -> LValueExpr IGUAL AssignExpr .)
+    DPAREN          reduce using rule 38 (AssignExpr -> LValueExpr IGUAL AssignExpr .)
+    DOISP           reduce using rule 38 (AssignExpr -> LValueExpr IGUAL AssignExpr .)
+    DCOCHETE        reduce using rule 38 (AssignExpr -> LValueExpr IGUAL AssignExpr .)
+    VIRGULA         reduce using rule 38 (AssignExpr -> LValueExpr IGUAL AssignExpr .)
+
+
+state 113
+
+    (40) CondExpr -> OrExpr INTERROGACAO Expr . DOISP CondExpr
+
+    DOISP           shift and go to state 142
+
+
+state 114
+
+    (41) OrExpr -> OrExpr OU AndExpr .
+    (43) AndExpr -> AndExpr . E EqExpr
+
+    INTERROGACAO    reduce using rule 41 (OrExpr -> OrExpr OU AndExpr .)
+    OU              reduce using rule 41 (OrExpr -> OrExpr OU AndExpr .)
+    PVIRGULA        reduce using rule 41 (OrExpr -> OrExpr OU AndExpr .)
+    DPAREN          reduce using rule 41 (OrExpr -> OrExpr OU AndExpr .)
+    DOISP           reduce using rule 41 (OrExpr -> OrExpr OU AndExpr .)
+    DCOCHETE        reduce using rule 41 (OrExpr -> OrExpr OU AndExpr .)
+    VIRGULA         reduce using rule 41 (OrExpr -> OrExpr OU AndExpr .)
+    E               shift and go to state 84
+
+
+state 115
+
+    (63) LValueExpr -> NOME ECOCHETE Expr . DCOCHETE
+    (67) PrimExpr -> NOME ECOCHETE Expr . DCOCHETE
+
+    DCOCHETE        shift and go to state 143
+
+
+state 116
+
+    (65) PrimExpr -> NOME EPAREN ListExpr . DPAREN
+    (74) ListExpr -> ListExpr . VIRGULA AssignExpr
+
+    DPAREN          shift and go to state 144
+    VIRGULA         shift and go to state 145
+
+
+state 117
+
+    (66) PrimExpr -> NOME EPAREN DPAREN .
+
+    MULTIPLICACAO   reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    DIVIDE          reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    MOD             reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    MAIS            reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    MENOS           reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    MENOR           reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    MAIOR           reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    MAIORIGUAL      reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    MENORIGUAL      reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    ATRIBUICAO      reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    DIFERENTE       reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    E               reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    INTERROGACAO    reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    OU              reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    PVIRGULA        reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    DPAREN          reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    DOISP           reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    DCOCHETE        reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+    VIRGULA         reduce using rule 66 (PrimExpr -> NOME EPAREN DPAREN .)
+
+
+state 118
+
+    (73) ListExpr -> AssignExpr .
+
+    DPAREN          reduce using rule 73 (ListExpr -> AssignExpr .)
+    VIRGULA         reduce using rule 73 (ListExpr -> AssignExpr .)
+
+
+state 119
+
+    (43) AndExpr -> AndExpr E EqExpr .
+    (45) EqExpr -> EqExpr . ATRIBUICAO DesigExpr
+    (46) EqExpr -> EqExpr . DIFERENTE DesigExpr
+
+    E               reduce using rule 43 (AndExpr -> AndExpr E EqExpr .)
+    INTERROGACAO    reduce using rule 43 (AndExpr -> AndExpr E EqExpr .)
+    OU              reduce using rule 43 (AndExpr -> AndExpr E EqExpr .)
+    PVIRGULA        reduce using rule 43 (AndExpr -> AndExpr E EqExpr .)
+    DPAREN          reduce using rule 43 (AndExpr -> AndExpr E EqExpr .)
+    DOISP           reduce using rule 43 (AndExpr -> AndExpr E EqExpr .)
+    DCOCHETE        reduce using rule 43 (AndExpr -> AndExpr E EqExpr .)
+    VIRGULA         reduce using rule 43 (AndExpr -> AndExpr E EqExpr .)
+    ATRIBUICAO      shift and go to state 85
+    DIFERENTE       shift and go to state 86
+
+
+state 120
+
+    (45) EqExpr -> EqExpr ATRIBUICAO DesigExpr .
+    (48) DesigExpr -> DesigExpr . MENOR AddExpr
+    (49) DesigExpr -> DesigExpr . MAIOR AddExpr
+    (50) DesigExpr -> DesigExpr . MAIORIGUAL AddExpr
+    (51) DesigExpr -> DesigExpr . MENORIGUAL AddExpr
+
+    ATRIBUICAO      reduce using rule 45 (EqExpr -> EqExpr ATRIBUICAO DesigExpr .)
+    DIFERENTE       reduce using rule 45 (EqExpr -> EqExpr ATRIBUICAO DesigExpr .)
+    E               reduce using rule 45 (EqExpr -> EqExpr ATRIBUICAO DesigExpr .)
+    INTERROGACAO    reduce using rule 45 (EqExpr -> EqExpr ATRIBUICAO DesigExpr .)
+    OU              reduce using rule 45 (EqExpr -> EqExpr ATRIBUICAO DesigExpr .)
+    PVIRGULA        reduce using rule 45 (EqExpr -> EqExpr ATRIBUICAO DesigExpr .)
+    DPAREN          reduce using rule 45 (EqExpr -> EqExpr ATRIBUICAO DesigExpr .)
+    DOISP           reduce using rule 45 (EqExpr -> EqExpr ATRIBUICAO DesigExpr .)
+    DCOCHETE        reduce using rule 45 (EqExpr -> EqExpr ATRIBUICAO DesigExpr .)
+    VIRGULA         reduce using rule 45 (EqExpr -> EqExpr ATRIBUICAO DesigExpr .)
+    MENOR           shift and go to state 87
+    MAIOR           shift and go to state 88
+    MAIORIGUAL      shift and go to state 89
+    MENORIGUAL      shift and go to state 90
+
+
+state 121
+
+    (46) EqExpr -> EqExpr DIFERENTE DesigExpr .
+    (48) DesigExpr -> DesigExpr . MENOR AddExpr
+    (49) DesigExpr -> DesigExpr . MAIOR AddExpr
+    (50) DesigExpr -> DesigExpr . MAIORIGUAL AddExpr
+    (51) DesigExpr -> DesigExpr . MENORIGUAL AddExpr
+
+    ATRIBUICAO      reduce using rule 46 (EqExpr -> EqExpr DIFERENTE DesigExpr .)
+    DIFERENTE       reduce using rule 46 (EqExpr -> EqExpr DIFERENTE DesigExpr .)
+    E               reduce using rule 46 (EqExpr -> EqExpr DIFERENTE DesigExpr .)
+    INTERROGACAO    reduce using rule 46 (EqExpr -> EqExpr DIFERENTE DesigExpr .)
+    OU              reduce using rule 46 (EqExpr -> EqExpr DIFERENTE DesigExpr .)
+    PVIRGULA        reduce using rule 46 (EqExpr -> EqExpr DIFERENTE DesigExpr .)
+    DPAREN          reduce using rule 46 (EqExpr -> EqExpr DIFERENTE DesigExpr .)
+    DOISP           reduce using rule 46 (EqExpr -> EqExpr DIFERENTE DesigExpr .)
+    DCOCHETE        reduce using rule 46 (EqExpr -> EqExpr DIFERENTE DesigExpr .)
+    VIRGULA         reduce using rule 46 (EqExpr -> EqExpr DIFERENTE DesigExpr .)
+    MENOR           shift and go to state 87
+    MAIOR           shift and go to state 88
+    MAIORIGUAL      shift and go to state 89
+    MENORIGUAL      shift and go to state 90
+
+
+state 122
+
+    (48) DesigExpr -> DesigExpr MENOR AddExpr .
+    (53) AddExpr -> AddExpr . MAIS MulExpr
+    (54) AddExpr -> AddExpr . MENOS MulExpr
+
+    MENOR           reduce using rule 48 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    MAIOR           reduce using rule 48 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    MAIORIGUAL      reduce using rule 48 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    MENORIGUAL      reduce using rule 48 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    ATRIBUICAO      reduce using rule 48 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    DIFERENTE       reduce using rule 48 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    E               reduce using rule 48 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    INTERROGACAO    reduce using rule 48 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    OU              reduce using rule 48 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    PVIRGULA        reduce using rule 48 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    DPAREN          reduce using rule 48 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    DOISP           reduce using rule 48 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    DCOCHETE        reduce using rule 48 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    VIRGULA         reduce using rule 48 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    MAIS            shift and go to state 91
+    MENOS           shift and go to state 92
+
+
+state 123
+
+    (49) DesigExpr -> DesigExpr MAIOR AddExpr .
+    (53) AddExpr -> AddExpr . MAIS MulExpr
+    (54) AddExpr -> AddExpr . MENOS MulExpr
+
+    MENOR           reduce using rule 49 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    MAIOR           reduce using rule 49 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    MAIORIGUAL      reduce using rule 49 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    MENORIGUAL      reduce using rule 49 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    ATRIBUICAO      reduce using rule 49 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    DIFERENTE       reduce using rule 49 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    E               reduce using rule 49 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    INTERROGACAO    reduce using rule 49 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    OU              reduce using rule 49 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    PVIRGULA        reduce using rule 49 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    DPAREN          reduce using rule 49 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    DOISP           reduce using rule 49 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    DCOCHETE        reduce using rule 49 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    VIRGULA         reduce using rule 49 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    MAIS            shift and go to state 91
+    MENOS           shift and go to state 92
+
+
+state 124
+
+    (50) DesigExpr -> DesigExpr MAIORIGUAL AddExpr .
+    (53) AddExpr -> AddExpr . MAIS MulExpr
+    (54) AddExpr -> AddExpr . MENOS MulExpr
+
+    MENOR           reduce using rule 50 (DesigExpr -> DesigExpr MAIORIGUAL AddExpr .)
+    MAIOR           reduce using rule 50 (DesigExpr -> DesigExpr MAIORIGUAL AddExpr .)
+    MAIORIGUAL      reduce using rule 50 (DesigExpr -> DesigExpr MAIORIGUAL AddExpr .)
+    MENORIGUAL      reduce using rule 50 (DesigExpr -> DesigExpr MAIORIGUAL AddExpr .)
+    ATRIBUICAO      reduce using rule 50 (DesigExpr -> DesigExpr MAIORIGUAL AddExpr .)
+    DIFERENTE       reduce using rule 50 (DesigExpr -> DesigExpr MAIORIGUAL AddExpr .)
+    E               reduce using rule 50 (DesigExpr -> DesigExpr MAIORIGUAL AddExpr .)
+    INTERROGACAO    reduce using rule 50 (DesigExpr -> DesigExpr MAIORIGUAL AddExpr .)
+    OU              reduce using rule 50 (DesigExpr -> DesigExpr MAIORIGUAL AddExpr .)
+    PVIRGULA        reduce using rule 50 (DesigExpr -> DesigExpr MAIORIGUAL AddExpr .)
+    DPAREN          reduce using rule 50 (DesigExpr -> DesigExpr MAIORIGUAL AddExpr .)
+    DOISP           reduce using rule 50 (DesigExpr -> DesigExpr MAIORIGUAL AddExpr .)
+    DCOCHETE        reduce using rule 50 (DesigExpr -> DesigExpr MAIORIGUAL AddExpr .)
+    VIRGULA         reduce using rule 50 (DesigExpr -> DesigExpr MAIORIGUAL AddExpr .)
+    MAIS            shift and go to state 91
+    MENOS           shift and go to state 92
+
+
+state 125
+
+    (51) DesigExpr -> DesigExpr MENORIGUAL AddExpr .
+    (53) AddExpr -> AddExpr . MAIS MulExpr
+    (54) AddExpr -> AddExpr . MENOS MulExpr
+
+    MENOR           reduce using rule 51 (DesigExpr -> DesigExpr MENORIGUAL AddExpr .)
+    MAIOR           reduce using rule 51 (DesigExpr -> DesigExpr MENORIGUAL AddExpr .)
+    MAIORIGUAL      reduce using rule 51 (DesigExpr -> DesigExpr MENORIGUAL AddExpr .)
+    MENORIGUAL      reduce using rule 51 (DesigExpr -> DesigExpr MENORIGUAL AddExpr .)
+    ATRIBUICAO      reduce using rule 51 (DesigExpr -> DesigExpr MENORIGUAL AddExpr .)
+    DIFERENTE       reduce using rule 51 (DesigExpr -> DesigExpr MENORIGUAL AddExpr .)
+    E               reduce using rule 51 (DesigExpr -> DesigExpr MENORIGUAL AddExpr .)
+    INTERROGACAO    reduce using rule 51 (DesigExpr -> DesigExpr MENORIGUAL AddExpr .)
+    OU              reduce using rule 51 (DesigExpr -> DesigExpr MENORIGUAL AddExpr .)
+    PVIRGULA        reduce using rule 51 (DesigExpr -> DesigExpr MENORIGUAL AddExpr .)
+    DPAREN          reduce using rule 51 (DesigExpr -> DesigExpr MENORIGUAL AddExpr .)
+    DOISP           reduce using rule 51 (DesigExpr -> DesigExpr MENORIGUAL AddExpr .)
+    DCOCHETE        reduce using rule 51 (DesigExpr -> DesigExpr MENORIGUAL AddExpr .)
+    VIRGULA         reduce using rule 51 (DesigExpr -> DesigExpr MENORIGUAL AddExpr .)
+    MAIS            shift and go to state 91
+    MENOS           shift and go to state 92
+
+
+state 126
+
+    (53) AddExpr -> AddExpr MAIS MulExpr .
+    (56) MulExpr -> MulExpr . MULTIPLICACAO UnExpr
+    (57) MulExpr -> MulExpr . DIVIDE UnExpr
+    (58) MulExpr -> MulExpr . MOD UnExpr
+
+    MAIS            reduce using rule 53 (AddExpr -> AddExpr MAIS MulExpr .)
+    MENOS           reduce using rule 53 (AddExpr -> AddExpr MAIS MulExpr .)
+    MENOR           reduce using rule 53 (AddExpr -> AddExpr MAIS MulExpr .)
+    MAIOR           reduce using rule 53 (AddExpr -> AddExpr MAIS MulExpr .)
+    MAIORIGUAL      reduce using rule 53 (AddExpr -> AddExpr MAIS MulExpr .)
+    MENORIGUAL      reduce using rule 53 (AddExpr -> AddExpr MAIS MulExpr .)
+    ATRIBUICAO      reduce using rule 53 (AddExpr -> AddExpr MAIS MulExpr .)
+    DIFERENTE       reduce using rule 53 (AddExpr -> AddExpr MAIS MulExpr .)
+    E               reduce using rule 53 (AddExpr -> AddExpr MAIS MulExpr .)
+    INTERROGACAO    reduce using rule 53 (AddExpr -> AddExpr MAIS MulExpr .)
+    OU              reduce using rule 53 (AddExpr -> AddExpr MAIS MulExpr .)
+    PVIRGULA        reduce using rule 53 (AddExpr -> AddExpr MAIS MulExpr .)
+    DPAREN          reduce using rule 53 (AddExpr -> AddExpr MAIS MulExpr .)
+    DOISP           reduce using rule 53 (AddExpr -> AddExpr MAIS MulExpr .)
+    DCOCHETE        reduce using rule 53 (AddExpr -> AddExpr MAIS MulExpr .)
+    VIRGULA         reduce using rule 53 (AddExpr -> AddExpr MAIS MulExpr .)
+    MULTIPLICACAO   shift and go to state 93
+    DIVIDE          shift and go to state 94
+    MOD             shift and go to state 95
+
+
+state 127
+
+    (54) AddExpr -> AddExpr MENOS MulExpr .
+    (56) MulExpr -> MulExpr . MULTIPLICACAO UnExpr
+    (57) MulExpr -> MulExpr . DIVIDE UnExpr
+    (58) MulExpr -> MulExpr . MOD UnExpr
+
+    MAIS            reduce using rule 54 (AddExpr -> AddExpr MENOS MulExpr .)
+    MENOS           reduce using rule 54 (AddExpr -> AddExpr MENOS MulExpr .)
+    MENOR           reduce using rule 54 (AddExpr -> AddExpr MENOS MulExpr .)
+    MAIOR           reduce using rule 54 (AddExpr -> AddExpr MENOS MulExpr .)
+    MAIORIGUAL      reduce using rule 54 (AddExpr -> AddExpr MENOS MulExpr .)
+    MENORIGUAL      reduce using rule 54 (AddExpr -> AddExpr MENOS MulExpr .)
+    ATRIBUICAO      reduce using rule 54 (AddExpr -> AddExpr MENOS MulExpr .)
+    DIFERENTE       reduce using rule 54 (AddExpr -> AddExpr MENOS MulExpr .)
+    E               reduce using rule 54 (AddExpr -> AddExpr MENOS MulExpr .)
+    INTERROGACAO    reduce using rule 54 (AddExpr -> AddExpr MENOS MulExpr .)
+    OU              reduce using rule 54 (AddExpr -> AddExpr MENOS MulExpr .)
+    PVIRGULA        reduce using rule 54 (AddExpr -> AddExpr MENOS MulExpr .)
+    DPAREN          reduce using rule 54 (AddExpr -> AddExpr MENOS MulExpr .)
+    DOISP           reduce using rule 54 (AddExpr -> AddExpr MENOS MulExpr .)
+    DCOCHETE        reduce using rule 54 (AddExpr -> AddExpr MENOS MulExpr .)
+    VIRGULA         reduce using rule 54 (AddExpr -> AddExpr MENOS MulExpr .)
+    MULTIPLICACAO   shift and go to state 93
+    DIVIDE          shift and go to state 94
+    MOD             shift and go to state 95
+
+
+state 128
+
+    (56) MulExpr -> MulExpr MULTIPLICACAO UnExpr .
+
+    MULTIPLICACAO   reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    DIVIDE          reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    MOD             reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    MAIS            reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    MENOS           reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    MENOR           reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    MAIOR           reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    MAIORIGUAL      reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    MENORIGUAL      reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    ATRIBUICAO      reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    DIFERENTE       reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    E               reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    INTERROGACAO    reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    OU              reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    PVIRGULA        reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    DPAREN          reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    DOISP           reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    DCOCHETE        reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+    VIRGULA         reduce using rule 56 (MulExpr -> MulExpr MULTIPLICACAO UnExpr .)
+
+
+state 129
+
+    (57) MulExpr -> MulExpr DIVIDE UnExpr .
+
+    MULTIPLICACAO   reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    DIVIDE          reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    MOD             reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    MAIS            reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    MENOS           reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    MENOR           reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    MAIOR           reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    MAIORIGUAL      reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    MENORIGUAL      reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    ATRIBUICAO      reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    DIFERENTE       reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    E               reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    INTERROGACAO    reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    OU              reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    PVIRGULA        reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    DPAREN          reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    DOISP           reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    DCOCHETE        reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    VIRGULA         reduce using rule 57 (MulExpr -> MulExpr DIVIDE UnExpr .)
+
+
+state 130
+
+    (58) MulExpr -> MulExpr MOD UnExpr .
+
+    MULTIPLICACAO   reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    DIVIDE          reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    MOD             reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    MAIS            reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    MENOS           reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    MENOR           reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    MAIOR           reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    MAIORIGUAL      reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    MENORIGUAL      reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    ATRIBUICAO      reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    DIFERENTE       reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    E               reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    INTERROGACAO    reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    OU              reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    PVIRGULA        reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    DPAREN          reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    DOISP           reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    DCOCHETE        reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+    VIRGULA         reduce using rule 58 (MulExpr -> MulExpr MOD UnExpr .)
+
+
+state 131
+
+    (67) PrimExpr -> NOME ECOCHETE . Expr DCOCHETE
+    (36) Expr -> . AssignExpr
+    (37) AssignExpr -> . CondExpr
+    (38) AssignExpr -> . LValueExpr IGUAL AssignExpr
+    (39) CondExpr -> . OrExpr
+    (40) CondExpr -> . OrExpr INTERROGACAO Expr DOISP CondExpr
+    (63) LValueExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (64) LValueExpr -> . NOME
+    (41) OrExpr -> . OrExpr OU AndExpr
+    (42) OrExpr -> . AndExpr
+    (43) AndExpr -> . AndExpr E EqExpr
+    (44) AndExpr -> . EqExpr
+    (45) EqExpr -> . EqExpr ATRIBUICAO DesigExpr
+    (46) EqExpr -> . EqExpr DIFERENTE DesigExpr
+    (47) EqExpr -> . DesigExpr
+    (48) DesigExpr -> . DesigExpr MENOR AddExpr
+    (49) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIORIGUAL AddExpr
+    (51) DesigExpr -> . DesigExpr MENORIGUAL AddExpr
+    (52) DesigExpr -> . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    NOME            shift and go to state 50
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    Expr                           shift and go to state 146
+    AssignExpr                     shift and go to state 46
+    CondExpr                       shift and go to state 47
+    LValueExpr                     shift and go to state 48
+    OrExpr                         shift and go to state 49
+    AndExpr                        shift and go to state 51
+    EqExpr                         shift and go to state 52
+    DesigExpr                      shift and go to state 53
+    AddExpr                        shift and go to state 54
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 132
+
+    (72) PrimExpr -> EPAREN Expr DPAREN .
+
+    MULTIPLICACAO   reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    DIVIDE          reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    MOD             reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    MAIS            reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    MENOS           reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    MENOR           reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    MAIOR           reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    MAIORIGUAL      reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    MENORIGUAL      reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    ATRIBUICAO      reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    DIFERENTE       reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    E               reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    INTERROGACAO    reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    OU              reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    PVIRGULA        reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    DPAREN          reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    DOISP           reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    DCOCHETE        reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+    VIRGULA         reduce using rule 72 (PrimExpr -> EPAREN Expr DPAREN .)
+
+
+state 133
+
+    (63) LValueExpr -> NOME ECOCHETE Expr . DCOCHETE
+
+    DCOCHETE        shift and go to state 147
+
+
+state 134
+
+    (30) Comando -> ESCREVA ASPASD NORMALSTRING ASPASD . PVIRGULA
+
+    PVIRGULA        shift and go to state 148
+
+
+state 135
+
+    (32) Comando -> SE EPAREN Expr DPAREN . ENTAO Comando
+    (33) Comando -> SE EPAREN Expr DPAREN . ENTAO Comando SENAO Comando
+
+    ENTAO           shift and go to state 149
+
+
+state 136
+
+    (34) Comando -> ENQUANTO EPAREN Expr DPAREN . EXECUTE Comando
+
+    EXECUTE         shift and go to state 150
+
+
+state 137
+
+    (20) ListaDeclVar -> Tipo NOME DeclVar PVIRGULA ListaDeclVar .
+
+    DCHAVES         reduce using rule 20 (ListaDeclVar -> Tipo NOME DeclVar PVIRGULA ListaDeclVar .)
+    PVIRGULA        reduce using rule 20 (ListaDeclVar -> Tipo NOME DeclVar PVIRGULA ListaDeclVar .)
+    RETORNE         reduce using rule 20 (ListaDeclVar -> Tipo NOME DeclVar PVIRGULA ListaDeclVar .)
+    LEIA            reduce using rule 20 (ListaDeclVar -> Tipo NOME DeclVar PVIRGULA ListaDeclVar .)
+    ESCREVA         reduce using rule 20 (ListaDeclVar -> Tipo NOME DeclVar PVIRGULA ListaDeclVar .)
+    NOVALINHA       reduce using rule 20 (ListaDeclVar -> Tipo NOME DeclVar PVIRGULA ListaDeclVar .)
+    SE              reduce using rule 20 (ListaDeclVar -> Tipo NOME DeclVar PVIRGULA ListaDeclVar .)
+    ENQUANTO        reduce using rule 20 (ListaDeclVar -> Tipo NOME DeclVar PVIRGULA ListaDeclVar .)
+    ECHAVES         reduce using rule 20 (ListaDeclVar -> Tipo NOME DeclVar PVIRGULA ListaDeclVar .)
+
+
+state 138
+
+    (21) ListaDeclVar -> Tipo NOME ECOCHETE INT DCOCHETE . DeclVar PVIRGULA ListaDeclVar
+    (7) DeclVar -> . VIRGULA NOME DeclVar
+    (8) DeclVar -> . VIRGULA NOME ECOCHETE INT DCOCHETE DeclVar
+    (9) DeclVar -> .
+
+    VIRGULA         shift and go to state 14
+    PVIRGULA        reduce using rule 9 (DeclVar -> .)
+
+    DeclVar                        shift and go to state 151
+
+state 139
+
+    (3) DeclFuncVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA DeclFuncVar .
+
+    PROGRAMA        reduce using rule 3 (DeclFuncVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA DeclFuncVar .)
+
+
+state 140
+
+    (8) DeclVar -> VIRGULA NOME ECOCHETE INT DCOCHETE DeclVar .
+
+    PVIRGULA        reduce using rule 8 (DeclVar -> VIRGULA NOME ECOCHETE INT DCOCHETE DeclVar .)
+
+
+state 141
+
+    (16) ListaParametrosCont -> Tipo NOME ECOCHETE DCOCHETE VIRGULA . ListaParametrosCont
+    (13) ListaParametrosCont -> . Tipo NOME
+    (14) ListaParametrosCont -> . Tipo NOME ECOCHETE DCOCHETE
+    (15) ListaParametrosCont -> . Tipo NOME VIRGULA ListaParametrosCont
+    (16) ListaParametrosCont -> . Tipo NOME ECOCHETE DCOCHETE VIRGULA ListaParametrosCont
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    Tipo                           shift and go to state 24
+    ListaParametrosCont            shift and go to state 152
+
+state 142
+
+    (40) CondExpr -> OrExpr INTERROGACAO Expr DOISP . CondExpr
+    (39) CondExpr -> . OrExpr
+    (40) CondExpr -> . OrExpr INTERROGACAO Expr DOISP CondExpr
+    (41) OrExpr -> . OrExpr OU AndExpr
+    (42) OrExpr -> . AndExpr
+    (43) AndExpr -> . AndExpr E EqExpr
+    (44) AndExpr -> . EqExpr
+    (45) EqExpr -> . EqExpr ATRIBUICAO DesigExpr
+    (46) EqExpr -> . EqExpr DIFERENTE DesigExpr
+    (47) EqExpr -> . DesigExpr
+    (48) DesigExpr -> . DesigExpr MENOR AddExpr
+    (49) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIORIGUAL AddExpr
+    (51) DesigExpr -> . DesigExpr MENORIGUAL AddExpr
+    (52) DesigExpr -> . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NOME            shift and go to state 97
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    OrExpr                         shift and go to state 49
+    CondExpr                       shift and go to state 153
+    AndExpr                        shift and go to state 51
+    EqExpr                         shift and go to state 52
+    DesigExpr                      shift and go to state 53
+    AddExpr                        shift and go to state 54
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 143
+
+    (63) LValueExpr -> NOME ECOCHETE Expr DCOCHETE .
+    (67) PrimExpr -> NOME ECOCHETE Expr DCOCHETE .
+
+    IGUAL           reduce using rule 63 (LValueExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    MULTIPLICACAO   reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    DIVIDE          reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    MOD             reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    MAIS            reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    MENOS           reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    MENOR           reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    MAIOR           reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    MAIORIGUAL      reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    MENORIGUAL      reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    ATRIBUICAO      reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    DIFERENTE       reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    E               reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    INTERROGACAO    reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    OU              reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    PVIRGULA        reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    DPAREN          reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    DOISP           reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    DCOCHETE        reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    VIRGULA         reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+
+
+state 144
+
+    (65) PrimExpr -> NOME EPAREN ListExpr DPAREN .
+
+    MULTIPLICACAO   reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    DIVIDE          reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    MOD             reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    MAIS            reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    MENOS           reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    MENOR           reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    MAIOR           reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    MAIORIGUAL      reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    MENORIGUAL      reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    ATRIBUICAO      reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    DIFERENTE       reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    E               reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    INTERROGACAO    reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    OU              reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    PVIRGULA        reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    DPAREN          reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    DOISP           reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    DCOCHETE        reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+    VIRGULA         reduce using rule 65 (PrimExpr -> NOME EPAREN ListExpr DPAREN .)
+
+
+state 145
+
+    (74) ListExpr -> ListExpr VIRGULA . AssignExpr
+    (37) AssignExpr -> . CondExpr
+    (38) AssignExpr -> . LValueExpr IGUAL AssignExpr
+    (39) CondExpr -> . OrExpr
+    (40) CondExpr -> . OrExpr INTERROGACAO Expr DOISP CondExpr
+    (63) LValueExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (64) LValueExpr -> . NOME
+    (41) OrExpr -> . OrExpr OU AndExpr
+    (42) OrExpr -> . AndExpr
+    (43) AndExpr -> . AndExpr E EqExpr
+    (44) AndExpr -> . EqExpr
+    (45) EqExpr -> . EqExpr ATRIBUICAO DesigExpr
+    (46) EqExpr -> . EqExpr DIFERENTE DesigExpr
+    (47) EqExpr -> . DesigExpr
+    (48) DesigExpr -> . DesigExpr MENOR AddExpr
+    (49) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIORIGUAL AddExpr
+    (51) DesigExpr -> . DesigExpr MENORIGUAL AddExpr
+    (52) DesigExpr -> . AddExpr
+    (53) AddExpr -> . AddExpr MAIS MulExpr
+    (54) AddExpr -> . AddExpr MENOS MulExpr
+    (55) AddExpr -> . MulExpr
+    (56) MulExpr -> . MulExpr MULTIPLICACAO UnExpr
+    (57) MulExpr -> . MulExpr DIVIDE UnExpr
+    (58) MulExpr -> . MulExpr MOD UnExpr
+    (59) MulExpr -> . UnExpr
+    (60) UnExpr -> . MENOS PrimExpr
+    (61) UnExpr -> . EXCLAMACAO PrimExpr
+    (62) UnExpr -> . PrimExpr
+    (65) PrimExpr -> . NOME EPAREN ListExpr DPAREN
+    (66) PrimExpr -> . NOME EPAREN DPAREN
+    (67) PrimExpr -> . NOME ECOCHETE Expr DCOCHETE
+    (68) PrimExpr -> . NOME
+    (69) PrimExpr -> . NUMERO
+    (70) PrimExpr -> . CAR
+    (71) PrimExpr -> . INT
+    (72) PrimExpr -> . EPAREN Expr DPAREN
+
+    NOME            shift and go to state 50
+    MENOS           shift and go to state 56
+    EXCLAMACAO      shift and go to state 59
+    NUMERO          shift and go to state 61
+    CAR             shift and go to state 62
+    INT             shift and go to state 63
+    EPAREN          shift and go to state 60
+
+    AssignExpr                     shift and go to state 154
+    CondExpr                       shift and go to state 47
+    LValueExpr                     shift and go to state 48
+    OrExpr                         shift and go to state 49
+    AndExpr                        shift and go to state 51
+    EqExpr                         shift and go to state 52
+    DesigExpr                      shift and go to state 53
+    AddExpr                        shift and go to state 54
+    MulExpr                        shift and go to state 55
+    UnExpr                         shift and go to state 57
+    PrimExpr                       shift and go to state 58
+
+state 146
+
+    (67) PrimExpr -> NOME ECOCHETE Expr . DCOCHETE
+
+    DCOCHETE        shift and go to state 155
+
+
+state 147
+
+    (63) LValueExpr -> NOME ECOCHETE Expr DCOCHETE .
+
+    PVIRGULA        reduce using rule 63 (LValueExpr -> NOME ECOCHETE Expr DCOCHETE .)
+
+
+state 148
+
+    (30) Comando -> ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA .
+
+    PVIRGULA        reduce using rule 30 (Comando -> ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA .)
+    RETORNE         reduce using rule 30 (Comando -> ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA .)
+    LEIA            reduce using rule 30 (Comando -> ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA .)
+    ESCREVA         reduce using rule 30 (Comando -> ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA .)
+    NOVALINHA       reduce using rule 30 (Comando -> ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA .)
+    SE              reduce using rule 30 (Comando -> ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA .)
+    ENQUANTO        reduce using rule 30 (Comando -> ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA .)
+    ECHAVES         reduce using rule 30 (Comando -> ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA .)
+    DCHAVES         reduce using rule 30 (Comando -> ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA .)
+    SENAO           reduce using rule 30 (Comando -> ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA .)
+
+
+state 149
+
+    (32) Comando -> SE EPAREN Expr DPAREN ENTAO . Comando
+    (33) Comando -> SE EPAREN Expr DPAREN ENTAO . Comando SENAO Comando
+    (26) Comando -> . PVIRGULA
+    (27) Comando -> . RETORNE Expr PVIRGULA
+    (28) Comando -> . LEIA LValueExpr PVIRGULA
+    (29) Comando -> . ESCREVA Expr PVIRGULA
+    (30) Comando -> . ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA
+    (31) Comando -> . NOVALINHA PVIRGULA
+    (32) Comando -> . SE EPAREN Expr DPAREN ENTAO Comando
+    (33) Comando -> . SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando
+    (34) Comando -> . ENQUANTO EPAREN Expr DPAREN EXECUTE Comando
+    (35) Comando -> . Bloco
+    (17) Bloco -> . ECHAVES ListaDeclVar ListaComando DCHAVES
+    (18) Bloco -> . ECHAVES ListaDeclVar DCHAVES
+
+    PVIRGULA        shift and go to state 28
+    RETORNE         shift and go to state 29
+    LEIA            shift and go to state 30
+    ESCREVA         shift and go to state 31
+    NOVALINHA       shift and go to state 32
+    SE              shift and go to state 33
+    ENQUANTO        shift and go to state 34
+    ECHAVES         shift and go to state 10
+
+    Comando                        shift and go to state 156
+    Bloco                          shift and go to state 35
+
+state 150
+
+    (34) Comando -> ENQUANTO EPAREN Expr DPAREN EXECUTE . Comando
+    (26) Comando -> . PVIRGULA
+    (27) Comando -> . RETORNE Expr PVIRGULA
+    (28) Comando -> . LEIA LValueExpr PVIRGULA
+    (29) Comando -> . ESCREVA Expr PVIRGULA
+    (30) Comando -> . ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA
+    (31) Comando -> . NOVALINHA PVIRGULA
+    (32) Comando -> . SE EPAREN Expr DPAREN ENTAO Comando
+    (33) Comando -> . SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando
+    (34) Comando -> . ENQUANTO EPAREN Expr DPAREN EXECUTE Comando
+    (35) Comando -> . Bloco
+    (17) Bloco -> . ECHAVES ListaDeclVar ListaComando DCHAVES
+    (18) Bloco -> . ECHAVES ListaDeclVar DCHAVES
+
+    PVIRGULA        shift and go to state 28
+    RETORNE         shift and go to state 29
+    LEIA            shift and go to state 30
+    ESCREVA         shift and go to state 31
+    NOVALINHA       shift and go to state 32
+    SE              shift and go to state 33
+    ENQUANTO        shift and go to state 34
+    ECHAVES         shift and go to state 10
+
+    Comando                        shift and go to state 157
+    Bloco                          shift and go to state 35
+
+state 151
+
+    (21) ListaDeclVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar . PVIRGULA ListaDeclVar
+
+    PVIRGULA        shift and go to state 158
+
+
+state 152
+
+    (16) ListaParametrosCont -> Tipo NOME ECOCHETE DCOCHETE VIRGULA ListaParametrosCont .
+
+    DPAREN          reduce using rule 16 (ListaParametrosCont -> Tipo NOME ECOCHETE DCOCHETE VIRGULA ListaParametrosCont .)
+
+
+state 153
+
+    (40) CondExpr -> OrExpr INTERROGACAO Expr DOISP CondExpr .
+
+    PVIRGULA        reduce using rule 40 (CondExpr -> OrExpr INTERROGACAO Expr DOISP CondExpr .)
+    DPAREN          reduce using rule 40 (CondExpr -> OrExpr INTERROGACAO Expr DOISP CondExpr .)
+    DOISP           reduce using rule 40 (CondExpr -> OrExpr INTERROGACAO Expr DOISP CondExpr .)
+    DCOCHETE        reduce using rule 40 (CondExpr -> OrExpr INTERROGACAO Expr DOISP CondExpr .)
+    VIRGULA         reduce using rule 40 (CondExpr -> OrExpr INTERROGACAO Expr DOISP CondExpr .)
+
+
+state 154
+
+    (74) ListExpr -> ListExpr VIRGULA AssignExpr .
+
+    DPAREN          reduce using rule 74 (ListExpr -> ListExpr VIRGULA AssignExpr .)
+    VIRGULA         reduce using rule 74 (ListExpr -> ListExpr VIRGULA AssignExpr .)
+
+
+state 155
+
+    (67) PrimExpr -> NOME ECOCHETE Expr DCOCHETE .
+
+    MULTIPLICACAO   reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    DIVIDE          reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    MOD             reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    MAIS            reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    MENOS           reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    MENOR           reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    MAIOR           reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    MAIORIGUAL      reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    MENORIGUAL      reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    ATRIBUICAO      reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    DIFERENTE       reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    E               reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    INTERROGACAO    reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    OU              reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    PVIRGULA        reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    DPAREN          reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    DOISP           reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    DCOCHETE        reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+    VIRGULA         reduce using rule 67 (PrimExpr -> NOME ECOCHETE Expr DCOCHETE .)
+
+
+state 156
+
+    (32) Comando -> SE EPAREN Expr DPAREN ENTAO Comando .
+    (33) Comando -> SE EPAREN Expr DPAREN ENTAO Comando . SENAO Comando
+
+  ! shift/reduce conflict for SENAO resolved as shift
+    PVIRGULA        reduce using rule 32 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando .)
+    RETORNE         reduce using rule 32 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando .)
+    LEIA            reduce using rule 32 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando .)
+    ESCREVA         reduce using rule 32 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando .)
+    NOVALINHA       reduce using rule 32 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando .)
+    SE              reduce using rule 32 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando .)
+    ENQUANTO        reduce using rule 32 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando .)
+    ECHAVES         reduce using rule 32 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando .)
+    DCHAVES         reduce using rule 32 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando .)
+    SENAO           shift and go to state 159
+
+  ! SENAO           [ reduce using rule 32 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando .) ]
+
+
+state 157
+
+    (34) Comando -> ENQUANTO EPAREN Expr DPAREN EXECUTE Comando .
+
+    PVIRGULA        reduce using rule 34 (Comando -> ENQUANTO EPAREN Expr DPAREN EXECUTE Comando .)
+    RETORNE         reduce using rule 34 (Comando -> ENQUANTO EPAREN Expr DPAREN EXECUTE Comando .)
+    LEIA            reduce using rule 34 (Comando -> ENQUANTO EPAREN Expr DPAREN EXECUTE Comando .)
+    ESCREVA         reduce using rule 34 (Comando -> ENQUANTO EPAREN Expr DPAREN EXECUTE Comando .)
+    NOVALINHA       reduce using rule 34 (Comando -> ENQUANTO EPAREN Expr DPAREN EXECUTE Comando .)
+    SE              reduce using rule 34 (Comando -> ENQUANTO EPAREN Expr DPAREN EXECUTE Comando .)
+    ENQUANTO        reduce using rule 34 (Comando -> ENQUANTO EPAREN Expr DPAREN EXECUTE Comando .)
+    ECHAVES         reduce using rule 34 (Comando -> ENQUANTO EPAREN Expr DPAREN EXECUTE Comando .)
+    DCHAVES         reduce using rule 34 (Comando -> ENQUANTO EPAREN Expr DPAREN EXECUTE Comando .)
+    SENAO           reduce using rule 34 (Comando -> ENQUANTO EPAREN Expr DPAREN EXECUTE Comando .)
+
+
+state 158
+
+    (21) ListaDeclVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA . ListaDeclVar
+    (19) ListaDeclVar -> .
+    (20) ListaDeclVar -> . Tipo NOME DeclVar PVIRGULA ListaDeclVar
+    (21) ListaDeclVar -> . Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA ListaDeclVar
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    DCHAVES         reduce using rule 19 (ListaDeclVar -> .)
+    PVIRGULA        reduce using rule 19 (ListaDeclVar -> .)
+    RETORNE         reduce using rule 19 (ListaDeclVar -> .)
+    LEIA            reduce using rule 19 (ListaDeclVar -> .)
+    ESCREVA         reduce using rule 19 (ListaDeclVar -> .)
+    NOVALINHA       reduce using rule 19 (ListaDeclVar -> .)
+    SE              reduce using rule 19 (ListaDeclVar -> .)
+    ENQUANTO        reduce using rule 19 (ListaDeclVar -> .)
+    ECHAVES         reduce using rule 19 (ListaDeclVar -> .)
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    Tipo                           shift and go to state 17
+    ListaDeclVar                   shift and go to state 160
+
+state 159
+
+    (33) Comando -> SE EPAREN Expr DPAREN ENTAO Comando SENAO . Comando
+    (26) Comando -> . PVIRGULA
+    (27) Comando -> . RETORNE Expr PVIRGULA
+    (28) Comando -> . LEIA LValueExpr PVIRGULA
+    (29) Comando -> . ESCREVA Expr PVIRGULA
+    (30) Comando -> . ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA
+    (31) Comando -> . NOVALINHA PVIRGULA
+    (32) Comando -> . SE EPAREN Expr DPAREN ENTAO Comando
+    (33) Comando -> . SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando
+    (34) Comando -> . ENQUANTO EPAREN Expr DPAREN EXECUTE Comando
+    (35) Comando -> . Bloco
+    (17) Bloco -> . ECHAVES ListaDeclVar ListaComando DCHAVES
+    (18) Bloco -> . ECHAVES ListaDeclVar DCHAVES
+
+    PVIRGULA        shift and go to state 28
+    RETORNE         shift and go to state 29
+    LEIA            shift and go to state 30
+    ESCREVA         shift and go to state 31
+    NOVALINHA       shift and go to state 32
+    SE              shift and go to state 33
+    ENQUANTO        shift and go to state 34
+    ECHAVES         shift and go to state 10
+
+    Comando                        shift and go to state 161
+    Bloco                          shift and go to state 35
+
+state 160
+
+    (21) ListaDeclVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA ListaDeclVar .
+
+    DCHAVES         reduce using rule 21 (ListaDeclVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA ListaDeclVar .)
+    PVIRGULA        reduce using rule 21 (ListaDeclVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA ListaDeclVar .)
+    RETORNE         reduce using rule 21 (ListaDeclVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA ListaDeclVar .)
+    LEIA            reduce using rule 21 (ListaDeclVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA ListaDeclVar .)
+    ESCREVA         reduce using rule 21 (ListaDeclVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA ListaDeclVar .)
+    NOVALINHA       reduce using rule 21 (ListaDeclVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA ListaDeclVar .)
+    SE              reduce using rule 21 (ListaDeclVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA ListaDeclVar .)
+    ENQUANTO        reduce using rule 21 (ListaDeclVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA ListaDeclVar .)
+    ECHAVES         reduce using rule 21 (ListaDeclVar -> Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA ListaDeclVar .)
+
+
+state 161
+
+    (33) Comando -> SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando .
+
+    PVIRGULA        reduce using rule 33 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando .)
+    RETORNE         reduce using rule 33 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando .)
+    LEIA            reduce using rule 33 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando .)
+    ESCREVA         reduce using rule 33 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando .)
+    NOVALINHA       reduce using rule 33 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando .)
+    SE              reduce using rule 33 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando .)
+    ENQUANTO        reduce using rule 33 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando .)
+    ECHAVES         reduce using rule 33 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando .)
+    DCHAVES         reduce using rule 33 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando .)
+    SENAO           reduce using rule 33 (Comando -> SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for SENAO in state 156 resolved as shift
