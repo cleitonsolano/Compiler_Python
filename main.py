@@ -11,14 +11,6 @@ if __name__ == '__main__':
 
 	parser.parse(data, lexer=lexer)
 
-	'''lexer.input(data)
-	while True:
-		tok = lexer.token()
-		
-		if not tok: 
-			break  
-		
-		print(tok)'''
 
 
 
