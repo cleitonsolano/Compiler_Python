@@ -23,10 +23,12 @@ def p_Programa(p):
 
 
 def p_DeclFuncVar(p):
-	''' DeclFuncVar : Tipo NOME DeclVar PVIRGULA DeclFuncVar
-					| Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA DeclFuncVar
-					| Tipo NOME DeclFunc DeclFuncVar
-					|  '''
+	'''
+	DeclFuncVar : Tipo NOME DeclVar PVIRGULA DeclFuncVar
+	DeclFuncVar : Tipo NOME ECOCHETE INTEIRO DCOCHETE DeclVar PVIRGULA DeclFuncVar
+	DeclFuncVar : Tipo NOME DeclFunc DeclFuncVar
+	DeclFuncVar :  
+	'''
 
 
 def p_DeclProg(p):
@@ -34,9 +36,11 @@ def p_DeclProg(p):
 
 
 def p_DeclVar(p):
-	''' DeclVar : VIRGULA NOME DeclVar 
-				| VIRGULA NOME ECOCHETE INT DCOCHETE DeclVar
-				|  '''
+	''' 
+	DeclVar : VIRGULA NOME DeclVar 
+	DeclVar : VIRGULA NOME ECOCHETE INTEIRO DCOCHETE DeclVar
+	DeclVar :  
+	'''
 
 
 def p_DeclFunc(p):
@@ -44,49 +48,64 @@ def p_DeclFunc(p):
 
 
 def p_ListaParametros(p):
-	''' ListaParametros : 
-						| ListaParametrosCont '''
+	''' 
+	ListaParametros : 
+	ListaParametros : ListaParametrosCont 
+	'''
 
 
 def p_ListaParametrosCont(p):
-	''' ListaParametrosCont : Tipo NOME
-							| Tipo NOME ECOCHETE DCOCHETE
-							| Tipo NOME VIRGULA ListaParametrosCont
-							| Tipo NOME ECOCHETE DCOCHETE VIRGULA ListaParametrosCont '''
+	''' 
+	ListaParametrosCont : Tipo NOME
+	ListaParametrosCont : Tipo NOME ECOCHETE DCOCHETE
+	ListaParametrosCont : Tipo NOME VIRGULA ListaParametrosCont
+	ListaParametrosCont : Tipo NOME ECOCHETE DCOCHETE VIRGULA ListaParametrosCont 
+	'''
 
 
 def p_Bloco(p):
-	''' Bloco : ECHAVES ListaDeclVar ListaComando DCHAVES
-			| ECHAVES ListaDeclVar DCHAVES '''
-
+	'''
+	Bloco : ECHAVES ListaDeclVar ListaComando DCHAVES
+	Bloco : ECHAVES ListaDeclVar DCHAVES 
+	'''
 
 def p_ListaDeclVar(p):
-	''' ListaDeclVar : 
-					| Tipo NOME DeclVar PVIRGULA ListaDeclVar 
-					| Tipo NOME ECOCHETE INT DCOCHETE DeclVar PVIRGULA ListaDeclVar '''
+	''' 
+	ListaDeclVar : 
+	ListaDeclVar : Tipo NOME DeclVar PVIRGULA ListaDeclVar 
+	ListaDeclVar : Tipo NOME ECOCHETE INTEIRO DCOCHETE DeclVar PVIRGULA ListaDeclVar 
+	'''
 
 
 def p_Tipo(p):
-	''' Tipo : INT
-			 | CAR '''
+	''' 
+	Tipo : INT
+	Tipo : CAR 
+	'''
 
 
 def p_ListaComando(p):
-	''' ListaComando : Comando
-					| Comando ListaComando '''
+	''' 
+	ListaComando : Comando
+	ListaComando : Comando ListaComando 
+	'''
 
 
 def p_Comando(p):
-	''' Comando : PVIRGULA
-				| RETORNE Expr PVIRGULA
-				| LEIA LValueExpr PVIRGULA
-				| ESCREVA Expr PVIRGULA
-				| ESCREVA ASPASD NORMALSTRING ASPASD PVIRGULA
-				| NOVALINHA PVIRGULA
-				| SE EPAREN Expr DPAREN ENTAO Comando
-				| SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando
-				| ENQUANTO EPAREN Expr DPAREN EXECUTE Comando
-				| Bloco '''
+	
+	''' 
+	Comando : PVIRGULA
+	Comando : RETORNE Expr PVIRGULA
+	Comando : LEIA LValueExpr PVIRGULA
+	Comando : ESCREVA Expr PVIRGULA
+	Comando : ESCREVA NORMALSTRING PVIRGULA
+	Comando : NOVALINHA PVIRGULA
+	Comando : SE EPAREN Expr DPAREN ENTAO Comando
+	Comando : SE EPAREN Expr DPAREN ENTAO Comando SENAO Comando
+	Comando : ENQUANTO EPAREN Expr DPAREN EXECUTE Comando
+	Comando : Expr PVIRGULA
+	Comando : Bloco 
+	'''
 
 
 def p_Expr(p):
@@ -95,77 +114,90 @@ def p_Expr(p):
 
 def p_AssignExpr(p):
 	''' AssignExpr : CondExpr
-				| LValueExpr IGUAL AssignExpr '''
+		AssignExpr : LValueExpr IGUAL AssignExpr 
+	'''
 
 
 def p_CondExpr(p):
 	''' CondExpr : OrExpr
-				| OrExpr INTERROGACAO Expr DOISP CondExpr '''
+		CondExpr : OrExpr INTERROGACAO Expr DOISP CondExpr 
+	'''
 
 
 def p_OrExpr(p):
 	''' OrExpr : OrExpr OU AndExpr
-			| AndExpr '''
+		OrExpr : AndExpr 
+	'''
 
 
 def p_AndExpr(p):
 	''' AndExpr : AndExpr E EqExpr
-				| EqExpr '''
+		AndExpr : EqExpr 
+	'''
 
 
 def p_EqExpr(p):
 	''' EqExpr : EqExpr ATRIBUICAO DesigExpr
-			   | EqExpr DIFERENTE DesigExpr
-			   | DesigExpr '''
+		EqExpr : EqExpr DIFERENTE DesigExpr
+		EqExpr : DesigExpr 
+	'''
 
 
 def p_DesigExpr(p):
 	''' DesigExpr : DesigExpr MENOR AddExpr
-				  | DesigExpr MAIOR AddExpr
-				  | DesigExpr MAIORIGUAL AddExpr
-				  | DesigExpr MENORIGUAL AddExpr
-				  | AddExpr '''
+		DesigExpr : DesigExpr MAIOR AddExpr
+		DesigExpr : DesigExpr MAIORIGUAL AddExpr
+		DesigExpr : DesigExpr MENORIGUAL AddExpr
+		DesigExpr : AddExpr 
+	'''
 
 
 def p_AddExpr(p):
 	''' AddExpr : AddExpr MAIS MulExpr
-                | AddExpr MENOS MulExpr
-                | MulExpr '''
+        AddExpr : AddExpr MENOS MulExpr
+        AddExpr : MulExpr 
+    '''
 
 
 def p_MulExpr(p):
 	''' MulExpr : MulExpr MULTIPLICACAO UnExpr
-				| MulExpr DIVIDE UnExpr
-				| MulExpr MOD UnExpr
-				| UnExpr '''
+		MulExpr : MulExpr DIVIDE UnExpr
+		MulExpr : MulExpr MOD UnExpr
+		MulExpr : UnExpr 
+	'''
 
 
 def p_UnExpr(p):
 	''' UnExpr : MENOS PrimExpr
-			   | EXCLAMACAO PrimExpr
-			   | PrimExpr '''
+		UnExpr : EXCLAMACAO PrimExpr
+		UnExpr : PrimExpr 
+	'''
 
 
 def p_LValueExpr(p):
 	''' LValueExpr : NOME ECOCHETE Expr DCOCHETE
-				   | NOME '''
+		LValueExpr : NOME 
+	'''
 
 
 def p_PrimExpr(p):
 	''' PrimExpr : NOME EPAREN ListExpr DPAREN
-				| NOME EPAREN DPAREN
-				| NOME ECOCHETE Expr DCOCHETE
-				| NOME
-				| NUMERO
-				| CAR
-				| INT
-				| EPAREN Expr DPAREN '''
+		PrimExpr : NOME EPAREN DPAREN
+		PrimExpr : NOME ECOCHETE Expr DCOCHETE
+		PrimExpr : NOME
+		PrimExpr : CCONSTANTE
+		PrimExpr : INTEIRO
+		PrimExpr : EPAREN Expr DPAREN 
+	'''
 
 
 def p_ListExpr(p):
 	''' ListExpr : AssignExpr
-				| ListExpr VIRGULA AssignExpr '''
+		ListExpr : ListExpr VIRGULA AssignExpr 
+	'''
 
+
+'''
 
 #evita que o token de erro seja gerado e redefinirá os contadores de erros, assim facilitando identificação de prox erros
 def p_erro1(t):
@@ -180,4 +212,5 @@ def p_erro2(p):
         raise SystemExit
 
 
+'''
 parser = yacc.yacc()
