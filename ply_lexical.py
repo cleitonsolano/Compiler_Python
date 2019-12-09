@@ -19,8 +19,8 @@ reservados = {
     'senao'     : 'SENAO',
     'enquanto'  : 'ENQUANTO',
     'execute'   : 'EXECUTE',
-    'e'           :   'E',
-    'ou'          :   'OU'
+    'e'         :   'E',
+    'ou'        :   'OU'
 }   
 
 tokens = ('NOME', 'INTEIRO', 'MAIS', 'MENOS', 'MULTIPLICACAO', 'DIVIDE', 'ATRIBUICAO',
@@ -124,7 +124,7 @@ def t_EXECUTE(t):
 def t_NOME(t):
     
     if t.value in reservados:# VERIFICANDO SE A PALAVRA É RESERVADA
-        t.type = reservados[ t.value ]
+        t.type = reservados[ str(t.value) ]
     
     return t
 
@@ -156,6 +156,7 @@ def t_INTEIRO(t):
 def t_NORMALSTRING(t):
     r'\"[^\"]*\"'
 
+    t.value = t.value[1:-1]
     if t.value.find('\n') != -1:
         print(f'\033[0;30;41mERRO\033[m : \033[0;30;41mCADEIA DE CARACTERES OCUPA MAIS DE UMA LINHA\033[m, LINHA: {t.lineno}')
         raise SystemExit
@@ -178,23 +179,37 @@ def t_error(t):
 
 def t_CCONSTANTE(t):
     r"\'.\'"
+    t.value = t.value[1:-1]
     return t
 
 
 # isso produz vários tipos de informações de depuração, incluindo todas as regras e as expressoes regulares
 #simboliza a leitura de entrada da entrada padrão ou de um arquivo especificado na linha do comando
 
-'''
+
 scanner = lex.lex()
 arquivo = open('entrada1.txt', 'r')
 arq = arquivo.read()
-sacanner.input(arq)
+arquivo.close()
+print("kkkkk")
+scanner.input(arq)
+print("kkkkk")
 while True:
+    print("kkkkk")
     tk = scanner.token()
+    print("kkkkk")
     if not tk:
         break
     print(f'TIPO = {tk.type}, VALOR = {tk.value}, LINHA = {tk.lineno}')
-arquivo.close()
+
+'''
+prin = lex.lex()
+prin.input(open("entrada1.txt", "r").read())
+while True:
+    tok = prin.token()
+    if not tok:
+        break
+        print(tok)
 '''
 
 
